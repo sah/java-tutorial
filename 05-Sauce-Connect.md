@@ -1,0 +1,56 @@
+Testing local apps with Sauce Connect
+=======
+
+Developing apps on `localhost` is extremely quick and efficient. However, `localhost` is not a publicly-accessible
+address on the Internet, so by default the browsers in the Sauce Labs cloud cannot 
+load and test an app that you are running locally.
+
+To get around this limitation, we created [Sauce Connect](https://saucelabs.com/docs/connect).
+Sauce Connect uses a secure tunnel protocol that gives specific Sauce machines
+access to your local network. Sauce Connect sessions are sandboxed
+from outside data flows and are a convenient way to securely test apps that
+aren't ready to be deployed on the Internet.
+
+![Sauce Connect](https://raw.github.com/saucelabs/php-tutorial/master/Diagram-Connect.png?login=jlipps&token=bd2ba4272c3899aa616f60ee70c0d128)
+
+To download Sauce Connect for the tutorial project, edit the `composer.json` file in the
+`sauce-tutorial` directory by putting a comma after the `sauce/sausage` line and adding the `sauce/connect` line so 
+that it looks like this:
+
+```json
+{
+  "require": {
+    "sauce/sausage": ">=0.5",
+    "sauce/connect": ">=3.0"
+  }
+}
+```
+
+Now run this command to download Sauce Connect:
+
+    php composer.phar update
+
+Sauce Connect is a fairly large binary file, so it may take a little while to
+download. After it finishes downloading run this command:
+
+**Mac/Linux:**
+
+    vendor/bin/sauce_connect
+
+**Windows:**
+
+    vendor\bin\sauce_connect.bat
+
+Since we already configured the Sauce credentials in an earlier tutorial,
+Sauce Connect starts up without further ado. It takes a while to load because
+it's provisioning a new clean virtual machine to handle the
+secure connection. When it says "Connected! You may start your tests..." you
+are good to go.
+
+When Sauce Connect is running, all tests that you run using your Sauce Labs
+account use the network on the machine where Sauce Connect is located.
+
+For more information about Sauce Connect, or to download and configure the
+Java binary on your own, see the [Sauce Connect documentation](https://saucelabs.com/docs/connect).
+
+* _Next_: [Running tests in parallel](https://github.com/saucelabs/php-tutorial/blob/master/06-Parallelism.md)
