@@ -3,7 +3,7 @@ Integrating Sauce into existing PHPUnit WebDriver Tests
 
 Do you already have a test suite running WebDriver tests? While we recommend
 using
-[Sausage](https://github.com/saucelabs/php-tutorial/blob/master/02-Setup.md),
+[Sausage](https://github.com/saucelabs/java-tutorial/blob/master/02-Setup.md),
 it's also possible to integrate with Sauce in whichever test framework you
 happen to be using -- you'll just miss out on a lot of features you get for
 free in Sausage (like automatic pass/fail reporting).  Let's take a look at an
@@ -108,5 +108,5 @@ and more streamlined browser configuration, etc...
 
 If you're interested in seeing how to install and configure Sausage, check out
 the [Setup
-tutorial](https://github.com/saucelabs/php-tutorial/blob/master/02-Setup.md).
+tutorial](https://github.com/saucelabs/java-tutorial/blob/master/02-Setup.md).
 Meanwhile, happy testing!

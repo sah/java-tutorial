@@ -60,4 +60,4 @@ You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg 
 
 Now, you're all set up!
 
-* _Next_: [Running your first test](https://github.com/saucelabs/php-tutorial/blob/master/03-First-Test.md)
+* _Next_: [Running your first test](https://github.com/saucelabs/java-tutorial/blob/master/03-First-Test.md)

@@ -11,24 +11,9 @@ access to your local network. Sauce Connect sessions are sandboxed
 from outside data flows and are a convenient way to securely test apps that
 aren't ready to be deployed on the Internet.
 
-![Sauce Connect](https://raw.github.com/saucelabs/php-tutorial/master/Diagram-Connect.png?login=jlipps&token=bd2ba4272c3899aa616f60ee70c0d128)
+![Sauce Connect](https://raw.github.com/saucelabs/java-tutorial/master/Diagram-Connect.png?login=jlipps&token=bd2ba4272c3899aa616f60ee70c0d128)
 
-To download Sauce Connect for the tutorial project, edit the `composer.json` file in the
-`sauce-tutorial` directory by putting a comma after the `sauce/sausage` line and adding the `sauce/connect` line so 
-that it looks like this:
-
-```json
-{
-  "require": {
-    "sauce/sausage": ">=0.5",
-    "sauce/connect": ">=3.0"
-  }
-}
-```
-
-Now run this command to download Sauce Connect:
-
-    php composer.phar update
+To install Sauce Connect, [download](https://saucelabs.com/downloads/Sauce-Connect-latest.zip) the zip file and extract it to your filesystem.
 
 Sauce Connect is a fairly large binary file, so it may take a little while to
 download. After it finishes downloading run this command:
@@ -53,4 +38,4 @@ account use the network on the machine where Sauce Connect is located.
 For more information about Sauce Connect, or to download and configure the
 Java binary on your own, see the [Sauce Connect documentation](https://saucelabs.com/docs/connect).
 
-* _Next_: [Running tests in parallel](https://github.com/saucelabs/php-tutorial/blob/master/06-Parallelism.md)
+* _Next_: [Running tests in parallel](https://github.com/saucelabs/java-tutorial/blob/master/06-Parallelism.md)

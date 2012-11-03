@@ -168,4 +168,4 @@ the Selenium `text()` command until its value is what we expect or we hit 10 sec
 Using spinAssert functions is a great way to make tests less brittle and more
 accepting of differences in network speeds, surges in traffic, and other challenges in the test environment.
 
-* _Finally_: [Next steps and more information](https://github.com/saucelabs/php-tutorial/blob/master/08-Info.md)
+* _Finally_: [Next steps and more information](https://github.com/saucelabs/java-tutorial/blob/master/08-Info.md)

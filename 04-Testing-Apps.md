@@ -354,5 +354,5 @@ Running them before every deployment will help ensure that you can
 welcome new users into your community and get them where they need to go.
 
 
-* _Next_: [Testing local apps with Sauce Connect](https://github.com/saucelabs/php-tutorial/blob/master/05-Sauce-Connect.md)
+* _Next_: [Testing local apps with Sauce Connect](https://github.com/saucelabs/java-tutorial/blob/master/05-Sauce-Connect.md)
 

@@ -66,7 +66,7 @@ public class WebDriverTest {
 }
 ```
 
-Let's break this test suite down, chunk by chunk:
+Let's break this test class down, chunk by chunk:
 
 ```java
 	@Before
@@ -112,8 +112,49 @@ The `tearDown()` method is run after every test in the class (by virtue of the J
 
 The WebDriverTest.java file demonstrates a basic JUnit test, now lets look at the WebDriverWithHelperTest.java class.
 
-That's it! You've seen how to run several important Selenium commands
-in the context of a custom PHPUnit test suite.
+**TestNG**
 
-* _Next_: [Running tests against web applications](https://github.com/saucelabs/php-tutorial/blob/master/04-Testing-Apps.md)
+The WebDriverTest class that gets created when the quickstart-webdriver-testng archetype is used looks pretty similar to the JUnit class.
+
+```java
+public class WebDriverTest {
+
+   	private WebDriver driver;
+	 
+    @Parameters({"username", "key", "os", "browser", "browserVersion"})
+    @BeforeMethod
+    public void setUp(@Optional("<your-user-name>") String username,
+                      @Optional("<your-access-key>") String key,
+                      @Optional("mac") String os,
+                      @Optional("iphone") String browser,
+                      @Optional("5.0") String browserVersion,
+                      Method method) throws Exception {
+
+        DesiredCapabilities capabillities = new DesiredCapabilities();
+        capabillities.setBrowserName(browser);
+        capabillities.setCapability("version", browserVersion);
+        capabillities.setCapability("platform", Platform.valueOf(os));
+        capabillities.setCapability("name", method.getName());
+        this.driver = new RemoteWebDriver(
+                new URL("http://" + username + ":" + key + "@ondemand.saucelabs.com:80/wd/hub"),
+                capabillities);
+    }
+
+    @Test
+    public void webDriver() throws Exception {
+        driver.get("http://www.amazon.com/");
+        assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more", driver.getTitle());
+    }
+
+    @AfterMethod
+    public void tearDown() throws Exception {
+        driver.quit();
+    }
+
+}
+```
+
+The main difference is that TestNG class has supplied the information for the desired browser settings as parameters using the org.testng.annotations.Parameters and org.testng.annotations.Optional annotations.
+
+* _Next_: [Running tests against web applications](https://github.com/saucelabs/java-tutorial/blob/master/04-Testing-Apps.md)
 
