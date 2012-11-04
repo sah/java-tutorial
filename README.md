@@ -1,9 +1,8 @@
 Sauce Labs, Selenium WebDriver, and Java Tutorials
 ============
-These tutorials explain how to use Java scripts to run automated Selenium WebDriver tests on the Sauce Labs cloud of Selenium servers. 
+These tutorials explain how to use Java test classes to run automated Selenium WebDriver tests on the Sauce Labs cloud of Selenium servers. 
 
-We assume that you have some familiarity with Java and Java-based unit testing libraries (eg. JUnit and TestNG), the command line interface in your operating system, and the fundamentals of automated testing. However, even if this is your first time working with PHP and automated 
-testing you should be able to successfully follow these step-by-step instructions. 
+We assume that you have some familiarity with Java and Java-based unit testing libraries (eg. JUnit and TestNG), the command line interface in your operating system, and the fundamentals of automated testing. However, even if this is your first time working with Java and automated testing you should be able to successfully follow these step-by-step instructions. 
 
 Let's get started!
 

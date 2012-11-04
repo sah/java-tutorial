@@ -93,9 +93,9 @@ Let's break this test class down, chunk by chunk:
 	}
 ```
 
-The `setUp()` method is run before every test in the class (by virtue of the JUnit org.junit.Before annotation). Here, we
-create a org.openqa.selenium.remote.DesiredCapabilities instance populated with the browser version and platform we
-wish to use.  We then create a org.openqa.selenium.remote.RemoteWebDriver instance using the DesiredCapabilities instance,
+The `setUp()` method is run before every test in the class (by virtue of the JUnit `org.junit.Before` annotation). Here, we
+create a `org.openqa.selenium.remote.DesiredCapabilities` instance populated with the browser version and platform we
+wish to use.  We then create a `org.openqa.selenium.remote.RemoteWebDriver` instance using the DesiredCapabilities instance,
 and with a URL that points to ondemand.saucelabs.com.
 
 ```java
