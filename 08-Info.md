@@ -1,27 +1,24 @@
 Next steps and more information
 ======
 
-Congratulations! You've successfully finished the Sauce Labs + PHP tutorial. Now you can write Selenium tests 
+Congratulations! You've successfully finished the Sauce Labs + Java tutorial. Now you can write Selenium tests 
 for your apps and run them in the Sauce Labs cloud. 
 
 Here are some links that you might find useful as you continue on your journey to Selenium mastery.
 
 Documentation
 ---
-*   [Sausage](http://github.com/jlipps/sausage)
-*   [PHPUnit assertions](http://www.phpunit.de/manual/3.4/en/appendixes.assertions.html)
-*   [PHPUnit + Selenium](http://www.phpunit.de/manual/3.4/en/appendixes.assertions.html)
-*   [Composer](http://getcomposer.org)
-*   [Paraunit](http://github.com/jlipps/paraunit)
+*   [Maven](http://maven.apache.org)
+*   [JUnit](http://www.junit.org)
+*   [TestNG](http://www.testng.org)
 *   [Sauce Labs available browsers](http://saucelabs.com/docs/browsers)
 *   [Sauce Connect](http://saucelabs.com/docs/connect)
 *   [Sauce Labs REST API](http://saucelabs.com/docs/rest)
-*   The [Selenium JSON Wire Protocol](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element) (useful to see all the different commands WebDriver
-    supports)
+*   The [Selenium JSON Wire Protocol](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element) (useful to see all the different commands WebDriver supports)
 
 Suggested articles
 ---
-* More on [spinAsserts](http://sauceio.com/index.php/2011/04/how-to-lose-races-and-win-at-selenium/)
+* More on [WebDriverWait](http://automatingsoftwaretesting.wordpress.com/2011/09/17/why-webdriverwait-thread-sleep/)
 * More on [CSS vs XPath](http://sauceio.com/index.php/2011/05/why-css-locators-are-the-way-to-go-vs-xpath/)
 * More on [finding and fixing flakey tests](http://sauceio.com/index.php/2012/09/using-sauce-breakpoints-to-find-and-fix-flakey-tests/)
 

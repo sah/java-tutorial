@@ -16,163 +16,148 @@ Selenium scripts against. It's a web-based "idea competition" demo app called
 [Shootout](https://github.com/Pylons/shootout). Shootout is a voting platform for ideas designed for the Pyramid Python 
 web framework. We won't test voting functionality in this demo, but feel free to play around with it.
 
-The test suite
+The test class
 ---
 
-If you downloaded Sausage you'll the have the `WebDriverDemoShootout.php` file in your `sauce-tutorial` directory. It's
+A `src/test/java/com/yourcompany/WebDriverDemoShootout.java` file should have been created in your `sauce-tutorial` directory by the Maven archetype. It's
 reproduced below. However, you can run these 8 tests before we examine them, 
 and you can view them in your [Sauce Labs tests page](https://saucelabs.com/tests) just like we did during the first 
 test:
 
-**Mac/Linux:**
+```java
+public class WebDriverDemoShootoutTest {
 
-    vendor/bin/phpunit WebDriverDemoShootout.php
+    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication();
 
-**Windows:**
+    private WebDriver driver;
 
-    vendor\bin\phpunit.bat WebDriverDemoShootout.php
-
-And here's the test suite:
-
-```php
-<?php
-
-require_once 'vendor/autoload.php';
-
-class WebDriverDemoShootout extends Sauce\Sausage\WebDriverTestCase
-{
-
-    protected $base_url = 'http://tutorialapp.saucelabs.com';
-
-    public static $browsers = array(
-        // run FF15 on Windows 8 on Sauce
-        array(
-            'browserName' => 'firefox',
-            'desiredCapabilities' => array(
-                'version' => '15',
-                'platform' => 'Windows 2012'
-            )
-    );
-
-    protected function randomUser()
-    {
-        $id = uniqid();
-        return array(
-            'username' => "fakeuser_$id",
-            'password' => 'testpass',
-            'name' => "Fake $id",
-            'email' => "$id@fake.com"
-        );
+    @Before
+    public void setUp() throws Exception {
+        DesiredCapabilities capabillities = DesiredCapabilities.firefox();
+        capabillities.setCapability("version", "5");
+        capabillities.setCapability("platform", Platform.XP);
+        this.driver = new RemoteWebDriver(
+                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+                capabillities);
+        driver.get("http://tutorialapp.saucelabs.com");
     }
 
-    protected function doLogin($username, $password)
-    {
-        $this->url('/');
-        $this->byName('login')->value($username);
-        $this->byName('password')->value($password);
-        $this->byCss('input.login')->click();
-
-        $this->assertTextPresent("Logged in successfully", $this->byId('message'));
+    @After
+    public void tearDown() throws Exception {
+        driver.quit();
     }
 
-    protected function doLogout()
-    {
-        $this->url('/logout');
-        $this->assertTextPresent("Logged out successfully", $this->byId('message'));
+    @Test
+    public void testLoginFailsWithBadCredentials() throws Exception {
+        String userName = getUniqueId();
+        String password = getUniqueId();
+        driver.findElement(By.name("login")).sendKeys(userName);
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.cssSelector("input.login")).click();
+        assertNotNull("Text not found", driver.findElement(By.id("message")));
     }
 
-    protected function doRegister($user, $logout = false)
-    {
-        $user['confirm_password'] = isset($user['confirm_password']) ?
-            $user['confirm_password'] : $user['password'];
-        $this->url('/register');
-        $this->byId('username')->value($user['username']);
-        $this->byId('password')->value($user['password']);
-        $this->byId('confirm_password')->value($user['confirm_password']);
-        $this->byId('name')->value($user['name']);
-        $this->byId('email')->value($user['email']);
-        $this->byId('form.submitted')->click();
-
-        if ($logout)
-            $this->doLogout();
+    private String getUniqueId() {
+        return Long.toHexString(Double.doubleToLongBits(Math.random()));
     }
 
-    public function setUp()
-    {
-        parent::setUp();
-        $this->setBrowserUrl('http://tutorialapp.saucelabs.com');
+    @Test
+    public void testLogout() throws Exception {
+        Map<String, String> userDetails = createRandomUser();
+        doRegister(userDetails, true);
     }
 
-    public function testLoginFailsWithBadCredentials()
-    {
-        $fake_username = uniqid();
-        $fake_password = uniqid();
+    private void doRegister(Map<String, String> userDetails, boolean logout) {
+        userDetails.put("confirm_password", userDetails.get("confirm_password") != null ?
+                userDetails.get("confirm_password") : userDetails.get("password"));
+        driver.get("http://tutorialapp.saucelabs.com/register");
+        driver.findElement(By.id("username")).sendKeys(userDetails.get("username"));
+        driver.findElement(By.id("password")).sendKeys(userDetails.get("password"));
+        driver.findElement(By.id("confirm_password")).sendKeys(userDetails.get("confirm_password"));
+        driver.findElement(By.id("name")).sendKeys(userDetails.get("name"));
+        driver.findElement(By.id("email")).sendKeys(userDetails.get("email"));
+        driver.findElement(By.id("form.submitted")).click();
 
-        $this->byName('login')->value($fake_username);
-        $this->byName('password')->value($fake_password);
-        $this->byCss('input.login')->click();
-
-        $this->assertTextPresent("Failed to login.", $this->byId('message'));
+        if (logout) {
+            doLogout();
+        }
     }
 
-    public function testLogout()
-    {
-        $this->doRegister($this->randomUser(), true);
+    private void doLogout() {
+        driver.get("http://tutorialapp.saucelabs.com/logout");
+        assertEquals("Message not found", "Logged out successfully.", driver.findElement(By.id("message")).getText());
     }
 
-    public function testLogin()
-    {
-        $user = $this->randomUser();
-        $this->doRegister($user, true);
-        $this->doLogin($user['username'], $user['password']);
+    private Map<String, String> createRandomUser() {
+        Map<String, String> userDetails = new HashMap<String, String>();
+        String fakeId = getUniqueId();
+        userDetails.put("username", fakeId);
+        userDetails.put("password", "testpass");
+        userDetails.put("name", "Fake " + fakeId);
+        userDetails.put("email", fakeId + "@fake.com");
+        return userDetails;
     }
 
-    public function testRegister()
-    {
-        $user = $this->randomUser();
-        $this->doRegister($user);
-        $logged_in_text = "You are logged in as {$user['username']}";
-        $this->assertTextPresent($logged_in_text);
+    @Test
+    public void testLogin() throws Exception {
+        Map<String, String> userDetails = createRandomUser();
+        doRegister(userDetails, true);
+        doLogin(userDetails.get("username"), userDetails.get("password"));
     }
 
-    public function testRegisterFailsWithoutUsername()
-    {
-        $user = $this->randomUser();
-        $user['username'] = '';
-        $this->doRegister($user);
-        $this->assertTextPresent("Please enter a value");
+    private void doLogin(String username, String password) {
+        driver.findElement(By.name("login")).sendKeys(username);
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.cssSelector("input.login")).click();
+        assertEquals("Message not found", "Logged in successfully.", driver.findElement(By.id("message")).getText());
     }
 
-    public function testRegisterFailsWithoutName()
-    {
-        $user = $this->randomUser();
-        $user['name'] = '';
-        $this->doRegister($user);
-        $this->assertTextPresent("Please enter a value");
+    @Test
+    public void testRegister() throws Exception {
+        Map<String, String> userDetails = createRandomUser();
+        doRegister(userDetails, false);
+        assertTrue("Message not found", driver.findElement(By.cssSelector(".username")).getText().contains("You are logged in as "));
     }
 
-    public function testRegisterFailsWithMismatchedPasswords()
-    {
-        $user = $this->randomUser();
-        $user['confirm_password'] = uniqid();
-        $this->doRegister($user);
-        $this->assertTextPresent("Fields do not match");
+    @Test
+    public void testRegisterFailsWithoutUsername() throws Exception {
+        Map<String, String> userDetails = createRandomUser();
+        userDetails.put("username", "");
+        doRegister(userDetails, false);
+        assertEquals("Message not found", "Please enter a value", driver.findElement(By.cssSelector(".error")).getText());
+
     }
 
-    public function testRegisterFailsWithBadEmail()
-    {
-        $user = $this->randomUser();
-        $user['email'] = 'test';
-        $this->doRegister($user);
-        $this->assertTextPresent("An email address must contain a single @");
-        $this->byId('email')->clear();
-        $this->byId('email')->value('@bob.com');
-        $this->byId('form.submitted')->click();
-        $this->assertTextPresent("The username portion of the email address is invalid");
-        $this->byId('email')->clear();
-        $this->byId('email')->value('test@bob');
-        $this->byId('form.submitted')->click();
-        $this->assertTextPresent("The domain portion of the email address is invalid");
+    @Test
+    public void testRegisterFailsWithoutName() throws Exception {
+        Map<String, String> userDetails = createRandomUser();
+        userDetails.put("name", "");
+        doRegister(userDetails, false);
+        assertEquals("Message not found", "Please enter a value", driver.findElement(By.cssSelector(".error")).getText());
+    }
+
+    @Test
+    public void testRegisterFailsWithMismatchedPasswords() throws Exception {
+        Map<String, String> userDetails = createRandomUser();
+        userDetails.put("confirm_password", getUniqueId());
+        doRegister(userDetails, false);
+        assertEquals("Message not found", "Fields do not match", driver.findElement(By.cssSelector(".error")).getText());
+    }
+
+    @Test
+    public void testRegisterFailsWithBadEmail() throws Exception {
+        Map<String, String> userDetails = createRandomUser();
+        userDetails.put("email", "test");
+        doRegister(userDetails, false);
+        assertEquals("Message not found", "An email address must contain a single @", driver.findElement(By.cssSelector(".error")).getText());
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys("@bob.com");
+        driver.findElement(By.id("form.submitted")).click();
+        assertEquals("Message not found", "The username portion of the email address is invalid (the portion before the @: )", driver.findElement(By.cssSelector(".error")).getText());
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys("test@bob");
+        driver.findElement(By.id("form.submitted")).click();
+        assertEquals("Message not found", "The domain portion of the email address is invalid (the portion after the @: bob)", driver.findElement(By.cssSelector(".error")).getText());
     }
 
 }
@@ -181,67 +166,56 @@ class WebDriverDemoShootout extends Sauce\Sausage\WebDriverTestCase
 You're already familiar with a lot of what's going on in this test suite. 
 Let's just take a quick look at some new commands and concepts.
 
-Setting `$base_url` allows us to relativize all further uses of `$this->url()`
-to a particular domain or URL.
 
-```php
-protected $base_url = 'http://tutorialapp.saucelabs.com';
-```
-
-The `randomUser()` function generates unique random user details for the registration
+The `createRandomUser()` function generates unique random user details for the registration
 and login tests. The randomness is important because it allows our tests to
 run in parallel as many times as we want without fear of collisions.
 
-```php
-protected function randomUser()
-{
-    $id = uniqid();
-    return array(
-        'username' => "fakeuser_$id",
-        'password' => 'testpass',
-        'name' => "Fake $id",
-        'email' => "$id@fake.com"
-    );
+```java
+private Map<String, String> createRandomUser() {
+    Map<String, String> userDetails = new HashMap<String, String>();
+    String fakeId = getUniqueId();
+    userDetails.put("username", fakeId);
+    userDetails.put("password", "testpass");
+    userDetails.put("name", "Fake " + fakeId);
+    userDetails.put("email", fakeId + "@fake.com");
+    return userDetails;
 }
 ```
 
-The next three functions are helper functions for our tests. If we were testing
+The next three methods are helper functions for our tests. If we were testing
 a local app, it would be more efficient to perform these actions on the
 server-side than to have Selenium generate states of being logged in, logged out,
 etc. However, since we're testing an app on the Internet whose backend is inaccessible
 to us, we're using these Selenium commands to put the user into these states.
 
-```php
-protected function doLogin($username, $password)
-{
-    $this->url('/');
-    $this->byName('login')->value($username);
-    $this->byName('password')->value($password);
-    $this->byCss('input.login')->click();
+```java
+private void doRegister(Map<String, String> userDetails, boolean logout) {
+       userDetails.put("confirm_password", userDetails.get("confirm_password") != null ?
+               userDetails.get("confirm_password") : userDetails.get("password"));
+       driver.get("http://tutorialapp.saucelabs.com/register");
+       driver.findElement(By.id("username")).sendKeys(userDetails.get("username"));
+       driver.findElement(By.id("password")).sendKeys(userDetails.get("password"));
+       driver.findElement(By.id("confirm_password")).sendKeys(userDetails.get("confirm_password"));
+       driver.findElement(By.id("name")).sendKeys(userDetails.get("name"));
+       driver.findElement(By.id("email")).sendKeys(userDetails.get("email"));
+       driver.findElement(By.id("form.submitted")).click();
 
-    $this->assertTextPresent("Logged in successfully", $this->byId('message'));
-}
+       if (logout) {
+           doLogout();
+       }
+   }
 
-protected function doLogout()
-{
-    $this->url('/logout');
-    $this->assertTextPresent("Logged out successfully", $this->byId('message'));
-}
+   private void doLogout() {
+       driver.get("http://tutorialapp.saucelabs.com/logout");
+       assertEquals("Message not found", "Logged out successfully.", driver.findElement(By.id("message")).getText());
+   }
 
-protected function doRegister($user, $logout = false)
-{
-    $user['confirm_password'] = isset($user['confirm_password']) ?
-        $user['confirm_password'] : $user['password'];
-    $this->url('/register');
-    $this->byId('username')->value($user['username']);
-    $this->byId('password')->value($user['password']);
-    $this->byId('confirm_password')->value($user['confirm_password']);
-    $this->byId('name')->value($user['name']);
-    $this->byId('email')->value($user['email']);
-    $this->byId('form.submitted')->click();
-
-    if ($logout)
-        $this->doLogout();
+private void doLogin(String username, String password) {
+    driver.findElement(By.name("login")).sendKeys(username);
+    driver.findElement(By.name("password")).sendKeys(password);
+    driver.findElement(By.cssSelector("input.login")).click();
+    assertEquals("Message not found", "Logged in successfully.", driver.findElement(By.id("message")).getText());
 }
 ```
 
@@ -249,37 +223,36 @@ In our first test we make sure that logging in doesn't work with bad username/pa
 values by asserting that we get a login failure message when we put in random
 text.
 
-```php
-public function testLoginFailsWithBadCredentials()
-{
-    $fake_username = uniqid();
-    $fake_password = uniqid();
-
-    $this->byName('login')->value($fake_username);
-    $this->byName('password')->value($fake_password);
-    $this->byCss('input.login')->click();
-
-    $this->assertTextPresent("Failed to login.", $this->byId('message'));
+```java
+@Test
+public void testLoginFailsWithBadCredentials() throws Exception {
+    String userName = getUniqueId();
+    String password = getUniqueId();
+    driver.findElement(By.name("login")).sendKeys(userName);
+    driver.findElement(By.name("password")).sendKeys(password);
+    driver.findElement(By.cssSelector("input.login")).click();
+    assertNotNull("Text not found", driver.findElement(By.id("message")));
 }
 ```
 
 Next we test login and logout functionality. The first test creates a new user
-and uses the `doLogout()` helper function to assert that the logout message
+and uses the `doLogout()` helper method to assert that the logout message
 appears. The second test creates a random user, logs it out, and then uses
-the `doLogin()` helper function to assert that the successful login message
+the `doLogin()` helper method to assert that the successful login message
 appears.
 
-```php
-public function testLogout()
-{
-    $this->doRegister($this->randomUser(), true);
+```java
+@Test
+public void testLogin() throws Exception {
+    Map<String, String> userDetails = createRandomUser();
+    doRegister(userDetails, true);
+    doLogin(userDetails.get("username"), userDetails.get("password"));
 }
 
-public function testLogin()
-{
-    $user = $this->randomUser();
-    $this->doRegister($user, true);
-    $this->doLogin($user['username'], $user['password']);
+@Test
+public void testLogout() throws Exception {
+    Map<String, String> userDetails = createRandomUser();
+    doRegister(userDetails, true);
 }
 ```
 
@@ -287,13 +260,12 @@ Then we test Shootout's signup functionality by using the
 registration helper function to create a new user, then we assert that the
 user is logged in (which happens after a successful registration).
 
-```php
-public function testRegister()
-{
-    $user = $this->randomUser();
-    $this->doRegister($user);
-    $logged_in_text = "You are logged in as {$user['username']}";
-    $this->assertTextPresent($logged_in_text);
+```java
+@Test
+public void testRegister() throws Exception {
+    Map<String, String> userDetails = createRandomUser();
+    doRegister(userDetails, false);
+    assertTrue("Message not found", driver.findElement(By.cssSelector(".username")).getText().contains("You are logged in as "));
 }
 ```
 
@@ -302,45 +274,46 @@ if the field is empty. Next we test if a mismatched password and password
 confirmation generate the desired error, and then we test to make sure that the app doesn't allow a successful 
 registration if various incorrect email formats are used.
 
-```php
-public function testRegisterFailsWithoutUsername()
-{
-    $user = $this->randomUser();
-    $user['username'] = '';
-    $this->doRegister($user);
-    $this->assertTextPresent("Please enter a value");
+```java
+@Test
+public void testRegisterFailsWithoutUsername() throws Exception {
+    Map<String, String> userDetails = createRandomUser();
+    userDetails.put("username", "");
+    doRegister(userDetails, false);
+    assertEquals("Message not found", "Please enter a value", driver.findElement(By.cssSelector(".error")).getText());
+
 }
 
-public function testRegisterFailsWithoutName()
-{
-    $user = $this->randomUser();
-    $user['name'] = '';
-    $this->doRegister($user);
-    $this->assertTextPresent("Please enter a value");
+@Test
+public void testRegisterFailsWithoutName() throws Exception {
+    Map<String, String> userDetails = createRandomUser();
+    userDetails.put("name", "");
+    doRegister(userDetails, false);
+    assertEquals("Message not found", "Please enter a value", driver.findElement(By.cssSelector(".error")).getText());
 }
 
-public function testRegisterFailsWithMismatchedPasswords()
-{
-    $user = $this->randomUser();
-    $user['confirm_password'] = uniqid();
-    $this->doRegister($user);
-    $this->assertTextPresent("Fields do not match");
+@Test
+public void testRegisterFailsWithMismatchedPasswords() throws Exception {
+    Map<String, String> userDetails = createRandomUser();
+    userDetails.put("confirm_password", getUniqueId());
+    doRegister(userDetails, false);
+    assertEquals("Message not found", "Fields do not match", driver.findElement(By.cssSelector(".error")).getText());
 }
 
-public function testRegisterFailsWithBadEmail()
-{
-    $user = $this->randomUser();
-    $user['email'] = 'test';
-    $this->doRegister($user);
-    $this->assertTextPresent("An email address must contain a single @");
-    $this->byId('email')->clear();
-    $this->byId('email')->value('@bob.com');
-    $this->byId('form.submitted')->click();
-    $this->assertTextPresent("The username portion of the email address is invalid");
-    $this->byId('email')->clear();
-    $this->byId('email')->value('test@bob');
-    $this->byId('form.submitted')->click();
-    $this->assertTextPresent("The domain portion of the email address is invalid");
+@Test
+public void testRegisterFailsWithBadEmail() throws Exception {
+    Map<String, String> userDetails = createRandomUser();
+    userDetails.put("email", "test");
+    doRegister(userDetails, false);
+    assertEquals("Message not found", "An email address must contain a single @", driver.findElement(By.cssSelector(".error")).getText());
+    driver.findElement(By.id("email")).clear();
+    driver.findElement(By.id("email")).sendKeys("@bob.com");
+    driver.findElement(By.id("form.submitted")).click();
+    assertEquals("Message not found", "The username portion of the email address is invalid (the portion before the @: )", driver.findElement(By.cssSelector(".error")).getText());
+    driver.findElement(By.id("email")).clear();
+    driver.findElement(By.id("email")).sendKeys("test@bob");
+    driver.findElement(By.id("form.submitted")).click();
+    assertEquals("Message not found", "The domain portion of the email address is invalid (the portion after the @: bob)", driver.findElement(By.cssSelector(".error")).getText());
 }
 ```
 

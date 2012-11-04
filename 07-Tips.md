@@ -13,26 +13,28 @@ of performance from a single test.
 
 What are dependencies? Imagine if we had a test suite with these two tests:
 
-```php
-function testLogin()
+```java
+@Test
+public void testLogin()
 {
     // do some stuff to trigger a login
-    $this->assertEquals("My Logged In Page", $this->title());
+    assertEquals("My Logged In Page", driver.getTitle());
 }
 
-function testUserOnlyFunctionality()
+@Test
+public void testUserOnlyFunctionality()
 {
-    $this->byId('userOnlyButton')->click();
-    $this->assertTextPresent("Result of clicking userOnlyButton");
+    driver.findElement(By.id("userOnlyButton")).click();
+    assertEquals("Result of clicking userOnlyButton", driver.findElement(By.id("some_result")));
 }
 ```
 
-In the first function's pseudocode the `testLogin()` function triggers the
+In the first function's pseudocode the `testLogin()` method triggers the
 browser to log in 
 and asserts that the login was successful. The second test clicks a button on the
 logged-in page and asserts that a certain result occurred.
 
-This test suite works fine as long as the tests run in order. But the
+This test class works fine as long as the tests run in order. But the
 assumption the second test makes (that we are already logged in) creates a 
 dependency on the first test. If these tests run at the same time, or if the
 second one runs before the first one, the browser's cookies will
@@ -43,29 +45,31 @@ run completely independently of the other. Let's fix the example above so
 there are no dependencies:
 
 
-```php
-function doLogin()
+```java
+private void doLogin()
 {
     // do some stuff to trigger a login
-    $this->assertEquals("My Logged In Page", $this->title());
+    assertEquals("My Logged In Page", driver.getTitle());
 }
 
-function testLogin()
+@Test
+public void testLogin()
 {
-    $this->doLogin();
+    doLogin();
 }
 
-function testUserOnlyFunctionality()
+@Test
+public void testUserOnlyFunctionality()
 {
-    $this->doLogin();
-    $this->byId('userOnlyButton')->click();
-    $this->assertTextPresent("Result of clicking userOnlyButton");
+    doLogin();
+    driver.findElement(By.id("userOnlyButton")).click();
+    assertEquals("Result of clicking userOnlyButton", driver.findElement(By.id("some_result")));
 }
 ```
 
 The main point is that it is dangerous to assume any state whatsoever when
 developing tests for your app. Instead, find ways to quickly generate
-desired states for individual tests the way we did above with the `doLogin()` function 
+desired states for individual tests the way we did above with the `doLogin()` method 
 -- it generates a logged-in state instead of assuming it. You might
 even want to develop an API for the development and test versions of your app
 that provides URL shortcuts that generate common states. For example, 
@@ -81,11 +85,11 @@ you are developing your tests, they will almost certainly break when you make
 unrelated refactoring changes to your HTML output.
 
 Instead, use sensible semantics for CSS IDs and form element names, and try to
-restrict yourself to using `$this->byId()` or `$this->byName()`. This makes it 
+restrict yourself to using `By.id()` or `By.name()`. This makes it 
 much less likely that you'll inadvertently break your page by shuffling some
 lines of code around.
 
-Use spinAsserts
+Use WebDriverWait
 ----
 One issue with Selenium is that it doesn't know when it's supposed to wait
 before executing the next command. When people click a submit button,
@@ -94,78 +98,15 @@ loads. Selenium, however, immediately executes the next command. If
 the next command is part of an assertion in your code the assertion may
 fail, even though if Selenium had waited a little bit longer it would have succeeded.
 
-The solution is to use a special kind of assertion called a spinAssert that was introduced earlier in this tutorial. 
-This kind of assertion only fails after retrying periodically over a specified amount of time.
+The solution is to use [WebDriverWait](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/support/ui/WebDriverWait.html), which in conjunction with an ExpectedConditions instance,
+will wait until the expected condition is found before continuing to your next line in the test .
 
-The definition of the spinAssert function in Sausage looks like this:
-
-```php
-public function spinAssert($msg, $test, $args=array(), $timeout=10)
+```java
+WebDriverWait wait = new WebDriverWait(driver, 5); // wait for max of 5 seconds
+wait.until(ExpectedConditions.presenceOfElementLocated(By.id("pg")));
 ```
 
-* `$msg` is the message that's passed to the Exception if the spinAssert fails.
-* `$test` is the function we are going to use for the assertion. It can be:
-  * An [anonymous function](http://php.net/manual/en/functions.anonymous.php)
-  * A string representing a function name
-  * An array of the form ```array($class_name, $method_name)```
-* `$args` is an array of arguments that's passed to the test function.
-* `$timeout` is an integer representing the number of seconds to spin.
-
-The spinAssert function calls the `$test` function once every second until
-the `$timeout` seconds limit is reached. If the `$test` function returns a true 
-value the assertion succeeds If the `$test` function returns a false value the test is 
-retried every second until it hits `$timeout` seconds. If it hits `$timeout` seconds the
-assertion fails.
-
-If spinAssert example earlier in the tutorial didn't have a spinAssert it would have looked like this:
-
-```php
-public function testSubmitComments()
-{
-    $comment = "This is a very insightful comment.";
-    $this->byId('comments')->click();
-    $this->keys($comment);
-    $this->byId('submit')->submit();
-    $this->assertEquals($this->byId('your_comments')->text(), "Your comments: $comment");
-}
-```
-
-The trouble with this is that after Selenium hits the submit button it 
-immediately gets the text from the comment results box (the element 
-id `#your_comments`). If the page didn't have time to get updated from the
-server the assertion fails even though it would have succeeded if Selenium had waited a 
-bit longer. 
-
-Let's look at the same function using spinAssert:
-
-```php
-public function testSubmitComments()
-{
-    $comment = "This is a very insightful comment.";
-    $this->byId('comments')->click();
-    $this->keys($comment);
-    $this->byId('submit')->submit();
-    $driver = $this;
-
-    $comment_test =
-        function() use ($comment, $driver)
-        {
-            return ($driver->byId('your_comments')->text() == "Your comments: $comment");
-        }
-    ;
-
-    $this->spinAssert("Comment never showed up!", $comment_test);
-
-}
-```
-
-In this function, we create an anonymous closure called `$comment_test` that
-returns true if the comments field has the right text in it and false
-if it doesn't. Then we call `$this->spinAssert` and pass it the test function.
-We're using the default timeout of 10 seconds, so our script keeps retrying 
-the Selenium `text()` command until its value is what we expect or we hit 10 seconds.
-
-Using spinAssert functions is a great way to make tests less brittle and more
+Using WebDriverWait is a great way to make tests less brittle and more
 accepting of differences in network speeds, surges in traffic, and other challenges in the test environment.
 
 * _Finally_: [Next steps and more information](https://github.com/saucelabs/java-tutorial/blob/master/08-Info.md)

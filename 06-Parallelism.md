@@ -22,9 +22,9 @@ Further information on the options available for running parallel tests using Te
 
 **JUnit**
 
-Tests can be run in parallel using JUnit, but it takes a little bit more work.  The Java helper libraries include a com.saucelabs.junit.Parallelized class, which creates a dynamic thread pool which will be used to hold each thread that is running a test.
+Tests can be run in parallel using JUnit, but it takes a little bit more work.  The Java helper libraries include a `com.saucelabs.junit.Parallelized` class, which creates a dynamic thread pool which will be used to hold each thread that is running a test.
 
-The following class demonstrates how a JUnit test can be updated to facilitate being run in parallel.
+The following class demonstrates how to update the WebDriverTest to facilitate being run in parallel.
 
 ```java
 @RunWith(Parallelized.class)

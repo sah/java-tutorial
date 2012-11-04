@@ -16,21 +16,25 @@ aren't ready to be deployed on the Internet.
 To install Sauce Connect, [download](https://saucelabs.com/downloads/Sauce-Connect-latest.zip) the zip file and extract it to your filesystem.
 
 Sauce Connect is a fairly large binary file, so it may take a little while to
-download. After it finishes downloading run this command:
+download. After it finishes downloading, unzip the zip file and run this command from the directory where the zip file was extracted:
 
-**Mac/Linux:**
+**Mac/Linux/Windows:**
 
-    vendor/bin/sauce_connect
-
-**Windows:**
-
-    vendor\bin\sauce_connect.bat
+    java -jar Sauce-Connect.jar <your-user-name> <your-access-key>
 
 Since we already configured the Sauce credentials in an earlier tutorial,
 Sauce Connect starts up without further ado. It takes a while to load because
 it's provisioning a new clean virtual machine to handle the
 secure connection. When it says "Connected! You may start your tests..." you
 are good to go.
+
+To update your tests to run using Sauce Connect, you will need to change the URL used to create the WebDriver instance to point to localhost:4445 instead of ondemand.saucelabs.com:80, eg.
+
+```java
+this.driver = new RemoteWebDriver(
+        new URL("http://<your-username>:<your-access-key>@localhost:4445/wd/hub"),
+        capabillities);
+```
 
 When Sauce Connect is running, all tests that you run using your Sauce Labs
 account use the network on the machine where Sauce Connect is located.

@@ -10,9 +10,21 @@ Run this command from your `sauce-tutorial` directory:
 
 **Mac/Linux/Windows:**
 
-This launches Maven and will download the dependencies, compile the source code and run the tests. After a few 
+This launches Maven and will download the dependencies, compiles the source code and run the tests. After a few 
 moments you should see that JUnit/TestNG has started. You might not see any output instantaneously, but
-eventually you will see a series of dots inching across the screen.
+eventually you will see the following output:
+
+	------------------------------------------------------
+	 T E S T S
+	-------------------------------------------------------
+	Running WebDriverTest
+	Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.384 sec
+	Running WebDriverWithHelperTest
+	Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.743 sec
+
+	Results :
+
+	Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
 
 While the tests are running, navigate to your [Sauce Labs tests page](https://saucelabs.com/tests). 
 From there you'll be able to see each test as it queues, runs, and finishes.
@@ -97,7 +109,7 @@ and with a URL that points to ondemand.saucelabs.com.
 Our first test! (Notice that all test functions are annotated with org.junit.Test). This test access www.amazon.com, and
 uses a [JUnit assertion]
 to check whether the page title contains the string "Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more. In the
-world of [PHPUnit and Selenium](http://www.phpunit.de/manual/3.4/en/selenium.html),
+world of [Java and WebDriver](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/WebDriver.html#getTitle()),
 calling `driver.getTitle()` tells the Selenium session to return the title of the
 currently-loaded page.
 
