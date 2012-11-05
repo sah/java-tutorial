@@ -99,7 +99,7 @@ the next command is part of an assertion in your code the assertion may
 fail, even though if Selenium had waited a little bit longer it would have succeeded.
 
 The solution is to use [WebDriverWait](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/support/ui/WebDriverWait.html), which in conjunction with an ExpectedConditions instance,
-will wait until the expected condition is found before continuing to your next line in the test .
+will wait until the expected condition is found before continuing to your next line in the test, eg.
 
 ```java
 WebDriverWait wait = new WebDriverWait(driver, 5); // wait for max of 5 seconds

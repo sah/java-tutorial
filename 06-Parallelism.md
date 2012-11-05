@@ -12,7 +12,7 @@ as you can at once. For an overview of how many tests you can run in parallel, s
 
 **TestNG**
 
-TestNG has built in support for running tests in parallel.  This can be configured in the testng.xml file for your tests:
+TestNG has built in support for running tests in parallel.  This can be configured in the `src\test\resources\xml\testng.xml` file for your tests:
 
 ```xml
 <suite name="ParallelTests" verbose="5" parallel="tests" thread-count="10">
@@ -22,7 +22,7 @@ Further information on the options available for running parallel tests using Te
 
 **JUnit**
 
-Tests can be run in parallel using JUnit, but it takes a little bit more work.  The [Java helper libraries]() include a `com.saucelabs.junit.Parallelized` class, which creates a dynamic thread pool which will be used to hold each thread that is running a test.
+Tests can be run in parallel using JUnit, but it takes a little bit more work.  The [Java helper libraries](https://github.com/saucelabs/sauce-java) include a `com.saucelabs.junit.Parallelized` class, which creates a dynamic thread pool which will be used to hold each thread that is running a test.
 
 The following class demonstrates how to update the WebDriverTest to facilitate being run in parallel.
 
