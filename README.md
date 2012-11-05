@@ -11,7 +11,7 @@ Next: [How Selenium WebDriver and Sauce Labs work](https://github.com/saucelabs/
 Table of Contents
 ---
 * [How Selenium WebDriver and Sauce Labs work](https://github.com/saucelabs/java-tutorial/blob/master/01-Selenium.md)
-* [Setting up your system to use Sauce with PHP](https://github.com/saucelabs/java-tutorial/blob/master/02-Setup.md)
+* [Setting up your system to use Sauce with Java](https://github.com/saucelabs/java-tutorial/blob/master/02-Setup.md)
 * [Running your first test](https://github.com/saucelabs/java-tutorial/blob/master/03-First-Test.md)
 * [Running tests against web applications](https://github.com/saucelabs/java-tutorial/blob/master/04-Testing-Apps.md)
 * [Testing local apps with Sauce Connect](https://github.com/saucelabs/java-tutorial/blob/master/05-Sauce-Connect.md)
