@@ -326,6 +326,4 @@ exactly what we want. Simple as they are, these login/signup tests are extremely
 Running them before every deployment will help ensure that you can 
 welcome new users into your community and get them where they need to go.
 
-
-* _Next_: [Testing local apps with Sauce Connect](https://github.com/saucelabs/java-tutorial/blob/master/05-Sauce-Connect.md)
-
+* _Next_: [Using the Sauce Java Helper libraries](https://github.com/saucelabs/java-tutorial/blob/master/04-Java-Helper.md)

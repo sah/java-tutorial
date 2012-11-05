@@ -20,7 +20,8 @@ In addition to the WebDriver.java class, the Maven archetype will create a class
 ```java
 public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
 
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("<your-user-name>", "<your-access-key>");
+    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
+				"<your-user-name>", "<your-access-key>");
 
     public @Rule
     SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
@@ -69,7 +70,7 @@ This WebDriverWithHelperTest is fundamentally the same as the WebDriverTest clas
 public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
 ```
 
-The class implements the com.saucelabs.common.SauceOnDemandSessionIdProvider interface, which requires that a `getSessionId()` method
+The class implements the `com.saucelabs.common.SauceOnDemandSessionIdProvider` interface, which requires that a `getSessionId()` method
 be implemented.
 
 ```java
@@ -79,10 +80,10 @@ public @Rule
 SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
 
 ```
-The com.saucelabs.common.SauceOnDemandAuthentication instance will be created with your Sauce OnDemand user name and access key, which will 
-in turn be used to create the com.saucelabs.junit.SauceOnDemandTestWatcher instance.
+The `com.saucelabs.common.SauceOnDemandAuthentication` instance will be created with your Sauce OnDemand user name and access key, which will 
+in turn be used to create the `com.saucelabs.junit.SauceOnDemandTestWatcher` instance.
 
-The SauceOnDemandTestWatcher instance will invoke the [Sauce REST API] to mark the Sauce Job as passed or failed if the JUnit test passes or fails.  It will also output the Sauce OnDemand session id to the stdout so that the [Sauce CI plugins] can parse the session id.
+The SauceOnDemandTestWatcher instance will invoke the [Sauce REST API](http://saucelabs.com/docs/rest) to mark the Sauce Job as passed or failed if the JUnit test passes or fails.  It will also output the Sauce OnDemand session id to the stdout so that the Sauce plugins for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) can parse the session id.
 
 **TestNG**
 
@@ -156,11 +157,13 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, 
 }
 ```
 
-This WebDriverWithHelperTest is fundamentally the same as the WebDriverTest class, with a couple of additions.
+This class too is fundamentally the same as the WebDriverTest class, with a couple of additions.
 
 ```java
 @Listeners({SauceOnDemandTestListener.class})
 public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 ```
 
-The class is annotated with the org.testng.annotations.Listeners annotation, which includes the com.saucelabs.testng.SauceOnDemandTestListener class.  The SauceOnDemandTestListener class will invoke the [Sauce REST API] to mark the Sauce Job as passed or failed if the JUnit test passes or fails.  It will also output the Sauce OnDemand session id to the stdout so that the [Sauce CI plugins] can parse the session id.
+The class is annotated with the `org.testng.annotations.Listeners` annotation, which includes the `com.saucelabs.testng.SauceOnDemandTestListener` class.  The SauceOnDemandTestListener class will invoke the [Sauce REST API](http://saucelabs.com/docs/rest) to mark the Sauce Job as passed or failed if the test passes or fails.  It will also output the Sauce OnDemand session id to the stdout so that the Sauce plugins for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) can parse the session id.
+
+* _Next_: [Testing local apps with Sauce Connect](https://github.com/saucelabs/java-tutorial/blob/master/05-Sauce-Connect.md)
