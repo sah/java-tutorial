@@ -57,7 +57,7 @@ To create a JUnit-based project, run:
 	-DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release \
 	-DarchetypeGroupId=com.saucelabs \
 	-DarchetypeArtifactId=quickstart-webdriver-junit \
-	-DarchetypeVersion=1.0.7 \
+	-DarchetypeVersion=1.0.10 \
 	-DsauceUserName=<your-username> \
 	-DsauceAccessKey=<your-access-key>
 
@@ -67,7 +67,7 @@ To create a TestNG-based project, run:
 	-DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release \
 	-DarchetypeGroupId=com.saucelabs \
 	-DarchetypeArtifactId=quickstart-webdriver-testng \
-	-DarchetypeVersion=1.0.7 \
+	-DarchetypeVersion=1.0.10 \
 	-DsauceUserName=<your-username> \
 	-DsauceAccessKey=<your-access-key>
 

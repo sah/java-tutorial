@@ -10,7 +10,7 @@ The Java helper libraries are included in the project by virtue of the following
 <dependency>
     <groupId>com.saucelabs</groupId>
     <artifactId>sauce_junit</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -93,7 +93,7 @@ The Java helper libraries are included in the project by virtue of the following
 <dependency>
     <groupId>com.saucelabs</groupId>
     <artifactId>sauce_testng</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <scope>test</scope>
 </dependency>
 ```
