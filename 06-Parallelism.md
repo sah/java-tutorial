@@ -22,7 +22,7 @@ Further information on the options available for running parallel tests using Te
 
 **JUnit**
 
-Tests can be run in parallel using JUnit, but it takes a little bit more work.  The Java helper libraries include a `com.saucelabs.junit.Parallelized` class, which creates a dynamic thread pool which will be used to hold each thread that is running a test.
+Tests can be run in parallel using JUnit, but it takes a little bit more work.  The [Java helper libraries]() include a `com.saucelabs.junit.Parallelized` class, which creates a dynamic thread pool which will be used to hold each thread that is running a test.
 
 The following class demonstrates how to update the WebDriverTest to facilitate being run in parallel.
 
@@ -45,6 +45,7 @@ public class WebDriverParallelTest {
     public static LinkedList browsersStrings() throws Exception {
         LinkedList browsers = new LinkedList();
         browsers.add(new String[]{Platform.MAC.toString(), "5.0", "iPhone"});
+		//add any additional browsers here
         return browsers;
     }
 
@@ -58,7 +59,7 @@ public class WebDriverParallelTest {
         capabillities.setCapability(CapabilityType.VERSION, version);
         capabillities.setCapability(CapabilityType.PLATFORM, os);
         this.driver = new RemoteWebDriver(
-                new URL("http://${sauceUserName}:${sauceAccessKey}@ondemand.saucelabs.com:80/wd/hub"),
+                new URL("http://<your-user-name>:<your-access-key>@ondemand.saucelabs.com:80/wd/hub"),
                 capabillities);
     }
 

@@ -71,7 +71,7 @@ To create a TestNG-based project, run:
 	-DsauceUserName=<your-username> \
 	-DsauceAccessKey=<your-access-key>
 
-You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg sauce-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the ~/sauce-tutorial directory.
+You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg sauce-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the ~sauce-tutorial directory.
 
 <a id="maven_win"></a>Maven Setup for Windows
 ---

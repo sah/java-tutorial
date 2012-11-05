@@ -1,6 +1,6 @@
 Using the Java Helper library
 ====
-The [Java helper library] adds some extra features to the running of tests using Sauce OnDemand, while only requiring minimal changes to the test class.  There are separate JUnit and TestNG versions of the Java helper library, which are included as dependencies in the Maven pom file when the archetype generation is performed.
+The [Java helper library](https://github.com/saucelabs/sauce-java) adds some extra features to the running of tests using Sauce OnDemand, while only requiring minimal changes to the test class.  There are separate JUnit and TestNG versions of the Java helper library, which are included as dependencies in the Maven pom file when the archetype generation is performed.
 
 **JUnit**
 

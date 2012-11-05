@@ -163,7 +163,7 @@ public class WebDriverDemoShootoutTest {
 }
 ```
 
-You're already familiar with a lot of what's going on in this test suite. 
+You're probably already familiar with a lot of what's going on in this test suite. 
 Let's just take a quick look at some new commands and concepts.
 
 
@@ -211,11 +211,11 @@ private void doRegister(Map<String, String> userDetails, boolean logout) {
        assertEquals("Message not found", "Logged out successfully.", driver.findElement(By.id("message")).getText());
    }
 
-private void doLogin(String username, String password) {
-    driver.findElement(By.name("login")).sendKeys(username);
-    driver.findElement(By.name("password")).sendKeys(password);
-    driver.findElement(By.cssSelector("input.login")).click();
-    assertEquals("Message not found", "Logged in successfully.", driver.findElement(By.id("message")).getText());
+   private void doLogin(String username, String password) {
+    	driver.findElement(By.name("login")).sendKeys(username);
+	    driver.findElement(By.name("password")).sendKeys(password);
+	    driver.findElement(By.cssSelector("input.login")).click();
+	    assertEquals("Message not found", "Logged in successfully.", driver.findElement(By.id("message")).getText());
 }
 ```
 

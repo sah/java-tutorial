@@ -11,6 +11,7 @@ Documentation
 *   [Maven](http://maven.apache.org)
 *   [JUnit](http://www.junit.org)
 *   [TestNG](http://www.testng.org)
+*   [Sauce Java helper library](https://github.com/saucelabs/sauce-java)
 *   [Sauce Labs available browsers](http://saucelabs.com/docs/browsers)
 *   [Sauce Connect](http://saucelabs.com/docs/connect)
 *   [Sauce Labs REST API](http://saucelabs.com/docs/rest)

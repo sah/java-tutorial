@@ -120,9 +120,7 @@ currently-loaded page.
 	}
 ```
 
-The `tearDown()` method is run after every test in the class (by virtue of the JUnit org.junit.After annotation).  We call `driver.quit()` to close the Selenium session.
-
-The WebDriverTest.java file demonstrates a basic JUnit test, now lets look at the WebDriverWithHelperTest.java class.
+The `tearDown()` method is run after every test in the class (by virtue of the JUnit `org.junit.After` annotation).  We call `driver.quit()` to close the Selenium session.
 
 **TestNG**
 
@@ -166,7 +164,9 @@ public class WebDriverTest {
 }
 ```
 
-The main difference is that TestNG class has supplied the information for the desired browser settings as parameters using the org.testng.annotations.Parameters and org.testng.annotations.Optional annotations.
+The main difference is that TestNG class has supplied the information for the desired browser settings as parameters using the `org.testng.annotations.Parameters` and `org.testng.annotations.Optional` annotations.
+
+The WebDriverTest.java file demonstrates a basic Selenium test using JUnit/TestNG, now lets look at the WebDriverWithHelperTest.java class.
 
 * _Next_: [Running tests against web applications](https://github.com/saucelabs/java-tutorial/blob/master/04-Testing-Apps.md)
 
