@@ -1,21 +1,67 @@
-Sauce Labs, Selenium WebDriver, and Java Tutorials
-============
-These tutorials explain how to use Java test classes to run automated Selenium WebDriver tests on the Sauce Labs cloud of Selenium servers. 
+Sauce Labs + Selenium WebDriver Java Tutorial
+====
 
-We assume that you have some familiarity with Java and Java-based unit testing libraries (eg. JUnit and TestNG), the command line interface in your operating system, and the fundamentals of automated testing. However, even if this is your first time working with Java and automated testing you should be able to successfully follow these step-by-step instructions. 
+This is the source code used for the tutorial available at
+[http://saucelabs.com/java](http://saucelabs.com/java).
 
-Let's get started!
+Organization
+----
 
-Next: [How Selenium WebDriver and Sauce Labs work](https://github.com/saucelabs/java-tutorial/blob/master/01-Selenium.md)
+The basis of the tutorial is a series of markdown files. These can be edited,
+but special care must be taken because some unconventional symbols/expressions
+are used to create special behavior when the files are rendered on Sauce's
+website.
 
-Table of Contents
----
-* [How Selenium WebDriver and Sauce Labs work](https://github.com/saucelabs/java-tutorial/blob/master/01-Selenium.md)
-* [Setting up your system to use Sauce with Java	](https://github.com/saucelabs/java-tutorial/blob/master/02-Setup.md)
-* [Running your first test](https://github.com/saucelabs/java-tutorial/blob/master/03-First-Test.md)
-* [Running tests against web applications](https://github.com/saucelabs/java-tutorial/blob/master/04-Testing-Apps.md)
-* [Using the Sauce Java Helper libraries](https://github.com/saucelabs/java-tutorial/blob/master/04-Java-Helper.md)
-* [Testing local apps with Sauce Connect](https://github.com/saucelabs/java-tutorial/blob/master/05-Sauce-Connect.md)
-* [Running tests in parallel](https://github.com/saucelabs/java-tutorial/blob/master/06-Parallelism.md)
-* [Tips for better Selenium test performance](https://github.com/saucelabs/java-tutorial/blob/master/07-Tips.md)
-* [Next steps and more information](https://github.com/saucelabs/java-tutorial/blob/master/08-Info.md)
+Images are in img/
+
+Conventions
+----
+
+Tutorial pages can be linked to each other by wrapping a URL with `##`, as
+in the following example:
+
+    [Link to intro page](##00-Introduction.md##)
+
+The link will be processed to point to the correct place in the Sauce website.
+
+The same convention can be used for images. It is assumed they are in the `img`
+directory so that prefix is not necessary:
+
+    ![A Cool image](##my_cool_image.png##)
+
+(This will display the image located at `img/my_cool_image.png`).
+
+Blocks of text which should only show up for specific platforms should be
+wrapped like so:
+
+    <!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
+    .... some mac/linux only text here ....
+    <!-- SAUCE:END_PLATFORM -->
+
+Platform names can be `MAC`, `LINUX`, or `WIN`, and can be unioned by using the
+pipe symbol.
+
+You can insert the Sauce username or access key like so:
+
+        vendor\bin\sauce_config.bat <!-- SAUCE:USERNAME --> <!-- SAUCE:ACCESS_KEY -->
+
+Which will show up as &lt;username&gt; and &lt;access_key&gt; if the user is
+not logged in.
+
+If the user is not logged in, you can generate an inline signup form with:
+
+    <!-- SAUCE:LOGIN -->
+
+Contributing
+----
+
+If you find errors in the tutorials or ways that they can be improved, please
+fork and send a pull request. We'd love your help in making these the best
+instructions ever on how to get started with Selenium WebDriver, Java, and Sauce
+Labs!
+
+Authors
+----
+
+*  Jonathan Lipps ([jlipps](http://github.com/jlipps/))
+*  Ross Rowe ([rossrowe](http://github.com/rossrowe/))
