@@ -46,6 +46,8 @@ test suite on Sauce, let's look at what actually happened under the hood. If
 you open the `src/test/java/com/yourcompany/WebDriverTest.java` file in your text editor, this is what
 you'll see:
 
+<!-- SAUCE:LOGIN -->
+
 **JUnit**
 
 ```java
@@ -60,7 +62,7 @@ public class WebDriverTest {
         capabillities.setCapability("version", "5");
         capabillities.setCapability("platform", Platform.XP);
         this.driver = new RemoteWebDriver(
-                new URL("http://<your-username>:<your-access-key>@ondemand.saucelabs.com:80/wd/hub"),
+                new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"),
                 capabillities);
     }
 
@@ -88,7 +90,7 @@ Let's break this test class down, chunk by chunk:
 	    capabillities.setCapability("version", "5");
 	    capabillities.setCapability("platform", Platform.XP);
 	    this.driver = new RemoteWebDriver(
-	            new URL("http://<your-username>:<your-access-key>@ondemand.saucelabs.com:80/wd/hub"),
+	            new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"),
 	            capabillities);
 	}
 ```
@@ -133,8 +135,8 @@ public class WebDriverTest {
 	 
     @Parameters({"username", "key", "os", "browser", "browserVersion"})
     @BeforeMethod
-    public void setUp(@Optional("<your-user-name>") String username,
-                      @Optional("<your-access-key>") String key,
+    public void setUp(@Optional("<!-- SAUCE:USERNAME -->") String username,
+                      @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
                       @Optional("mac") String os,
                       @Optional("iphone") String browser,
                       @Optional("5.0") String browserVersion,

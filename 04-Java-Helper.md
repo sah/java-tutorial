@@ -17,11 +17,12 @@ The Java helper libraries are included in the project by virtue of the following
 
 In addition to the WebDriver.java class, the Maven archetype will create a class which demonstrates how to update a test to use the Java helper library.  This class is located in the `src/test/java/com/yourcompany/WebDriverWithHelperTest.java` file:
 
+<!-- SAUCE:LOGIN -->
 ```java
 public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
 
     public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
-				"<your-user-name>", "<your-access-key>");
+				"<!-- SAUCE:USERNAME -->", "<!-- SAUCE:ACCESS_KEY -->");
 
     public @Rule
     SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
@@ -110,8 +111,8 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, 
 
     @Parameters({"username", "key", "os", "browser", "browserVersion"})
     @BeforeMethod
-    public void setUp(@Optional("${sauceUserName}") String username,
-                      @Optional("${sauceAccessKey}") String key,
+    public void setUp(@Optional("<!-- SAUCE:USERNAME -->") String username,
+                      @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
                       @Optional("mac") String os,
                       @Optional("iphone") String browser,
                       @Optional("5.0") String browserVersion,

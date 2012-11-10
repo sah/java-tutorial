@@ -9,7 +9,8 @@ to use Sauce, this tutorial will assume that this is our framework.
 Although this tutorial is not a comprehensive guide for getting Java and Maven set up on
 your system, here are some guidelines:
 
-Java and Maven Setup for Mac
+<!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
+Java and Maven Setup for Mac and Linux
 ---
 
 Download and install [Java](http://www.java.com/en/download/index.jsp) if it isn't already installed on your system.
@@ -18,19 +19,10 @@ Go to the [Maven download](http://maven.apache.org/download.html) page to downlo
 
 	export PATH=YOUR_MAVEN_PATH/bin:$PATH
 
-* Continue to [Maven project setup for Mac](#maven_mac)
+* Continue to [Maven project setup for Mac and Linux](#maven_mac)
+<!-- SAUCE:END_PLATFORM -->
 
-Java and Maven Setup for Linux
----
-
-Download and install [Java](http://www.java.com/en/download/index.jsp) if it isn't already installed on your system.
-
-Go to the [Maven download](http://maven.apache.org/download.html) page to download the Maven binary distribution and extract it to your file system.  Add the `bin` directory to your path, eg.
-
-	export PATH=YOUR_MAVEN_PATH/bin:$PATH
-
-* Continue to [Maven project setup for Linux](#maven_linux)
-
+<!-- SAUCE:BEGIN_PLATFORM:WIN -->
 Java and Maven Setup for Windows
 ---
 
@@ -41,7 +33,9 @@ Go to the [Maven download](http://maven.apache.org/download.html) page to downlo
 	set PATH=YOUR_MAVEN_PATH/bin:%PATH%
 
 * Continue to [Maven project setup for Windows](#maven_win)
+<!-- SAUCE:END_PLATFORM -->
 
+<!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
 <a id="maven_mac"></a><a id="maven_linux"></a>Maven Setup for Mac and Linux
 ---
 First, let's create a project directory that we'll use for this tutorial:
@@ -51,6 +45,8 @@ First, let's create a project directory that we'll use for this tutorial:
 Now we can a Maven command to download and install a sample project using your username and Sauce access key. You can
 find your Sauce access key on your [Sauce account page](https://saucelabs.com/account).
 
+<!-- SAUCE:LOGIN -->
+
 To create a JUnit-based project, run:
 
 	mvn archetype:generate \
@@ -58,8 +54,8 @@ To create a JUnit-based project, run:
 	-DarchetypeGroupId=com.saucelabs \
 	-DarchetypeArtifactId=quickstart-webdriver-junit \
 	-DarchetypeVersion=1.0.10 \
-	-DsauceUserName=<your-username> \
-	-DsauceAccessKey=<your-access-key>
+	-DsauceUserName=<!-- SAUCE:USERNAME --> \
+	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
 To create a TestNG-based project, run:
 	
@@ -68,11 +64,14 @@ To create a TestNG-based project, run:
 	-DarchetypeGroupId=com.saucelabs \
 	-DarchetypeArtifactId=quickstart-webdriver-testng \
 	-DarchetypeVersion=1.0.10 \
-	-DsauceUserName=<your-username> \
-	-DsauceAccessKey=<your-access-key>
+	-DsauceUserName=<!-- SAUCE:USERNAME --> \
+	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
 You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg sauce-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the ~sauce-tutorial directory.
 
+<!-- SAUCE:END_PLATFORM -->
+
+<!-- SAUCE:BEGIN_PLATFORM:WIN -->
 <a id="maven_win"></a>Maven Setup for Windows
 ---
 First, let's create a project directory that we'll use for this tutorial:
@@ -92,9 +91,11 @@ To create a TestNG-based project, run:
 	
 	C:\> cd C:\sauce-tutorial
 
-	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release 	-DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=1.0.7	-DsauceUserName=<your-username>	-DsauceAccessKey=<your-access-key>
+	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release 	-DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=1.0.7	-DsauceUserName=<!-- SAUCE:USERNAME -->	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
 You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg sauce-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the C:\sauce-tutorial directory.
+
+<!-- SAUCE:END_PLATFORM -->
 
 Now, you're all set up!
 

@@ -30,9 +30,10 @@ are good to go.
 
 To update your tests to run using Sauce Connect, you will need to change the URL used to create the WebDriver instance to point to localhost:4445 instead of ondemand.saucelabs.com:80, eg.
 
+<!-- SAUCE:LOGIN -->
 ```java
 this.driver = new RemoteWebDriver(
-        new URL("http://<your-username>:<your-access-key>@localhost:4445/wd/hub"),
+        new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@localhost:4445/wd/hub"),
         capabillities);
 ```
 

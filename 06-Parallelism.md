@@ -26,6 +26,7 @@ Tests can be run in parallel using JUnit, but it takes a little bit more work.  
 
 The following class demonstrates how to update the WebDriverTest to facilitate being run in parallel.
 
+<!-- SAUCE:LOGIN -->
 ```java
 @RunWith(Parallelized.class)
 public class WebDriverParallelTest {
@@ -59,7 +60,7 @@ public class WebDriverParallelTest {
         capabillities.setCapability(CapabilityType.VERSION, version);
         capabillities.setCapability(CapabilityType.PLATFORM, os);
         this.driver = new RemoteWebDriver(
-                new URL("http://<your-user-name>:<your-access-key>@ondemand.saucelabs.com:80/wd/hub"),
+                new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"),
                 capabillities);
     }
 

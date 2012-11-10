@@ -31,7 +31,7 @@ Selenium is being discussed.
 
 Selenium can be visualized like this:
 
-![Selenium architecture](https://raw.github.com/saucelabs/java-tutorial/master/Diagram-Selenium.png?login=saucelabs&token=de87203126c9a522d34c0cc90bb50dc3)
+![Selenium architecture](##Diagram-Selenium.png##)
 
 In this diagram, all of the components (the Java test class, the Selenium server,
 and the browsers with the Selenium extensions installed) run on your computer
@@ -54,7 +54,7 @@ don't have to: your script stays exactly the same, but instead of talking
 to a Selenium server that you set up on your own computer, your script talks to a Selenium server running
 in the Sauce Labs cloud. Check out this diagram:
 
-![Sauce architecture](https://raw.github.com/saucelabs/java-tutorial/master/Diagram-Sauce.png?login=saucelabs&token=fac0276f2bd4114233efea4db18ca6af)
+![Sauce architecture](##Diagram-Sauce.png##)
 
 The only difference when using Sauce Labs to run your Selenium scripts is that
 the Internet is the communication layer between your Java class and the
