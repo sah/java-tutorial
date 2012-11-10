@@ -43,4 +43,4 @@ account use the network on the machine where Sauce Connect is located.
 For more information about Sauce Connect, or to download and configure the
 Java binary on your own, see the [Sauce Connect documentation](https://saucelabs.com/docs/connect).
 
-* _Next_: [Running tests in parallel](https://github.com/saucelabs/java-tutorial/blob/master/06-Parallelism.md)
+* _Next_: [Running tests in parallel](##06-Parallelism.md##)

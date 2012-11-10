@@ -77,5 +77,5 @@ public class WebDriverParallelTest {
 }
 ``` 
 
-* _Next_: [Tips for better Selenium test performance](https://github.com/saucelabs/java-tutorial/blob/master/07-Tips.md)
+* _Next_: [Tips for better Selenium test performance](##07-Tips.md##)
 

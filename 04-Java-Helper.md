@@ -167,4 +167,4 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, 
 
 The class is annotated with the `org.testng.annotations.Listeners` annotation, which includes the `com.saucelabs.testng.SauceOnDemandTestListener` class.  The SauceOnDemandTestListener class will invoke the [Sauce REST API](http://saucelabs.com/docs/rest) to mark the Sauce Job as passed or failed if the test passes or fails.  It will also output the Sauce OnDemand session id to the stdout so that the Sauce plugins for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) can parse the session id.
 
-* _Next_: [Testing local apps with Sauce Connect](https://github.com/saucelabs/java-tutorial/blob/master/05-Sauce-Connect.md)
+* _Next_: [Testing local apps with Sauce Connect](##05-Sauce-Connect.md##)

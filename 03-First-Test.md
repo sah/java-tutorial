@@ -170,5 +170,5 @@ The main difference is that TestNG class has supplied the information for the de
 
 The WebDriverTest.java file demonstrates a basic Selenium test using JUnit/TestNG, now lets look at the WebDriverWithHelperTest.java class.
 
-* _Next_: [Running tests against web applications](https://github.com/saucelabs/java-tutorial/blob/master/04-Testing-Apps.md)
+* _Next_: [Running tests against web applications](##04-Testing-Apps.md##)
 

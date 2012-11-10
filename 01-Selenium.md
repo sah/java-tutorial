@@ -64,6 +64,6 @@ iPad, and various Android devices.
 
 Enough about us! Let's get your system set up to run Selenium scripts on Sauce Labs.
 
-* _Next_: [Setting up your system to use Sauce with Java](https://github.com/saucelabs/java-tutorial/blob/master/02-Setup.md)
+* _Next_: [Setting up your system to use Sauce with Java](##02-Setup.md##)
 
 
