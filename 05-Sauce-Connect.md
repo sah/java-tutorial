@@ -20,7 +20,9 @@ download. After it finishes downloading, unzip the zip file and run this command
 
 **Mac/Linux/Windows:**
 
-    java -jar Sauce-Connect.jar <your-user-name> <your-access-key>
+```bash
+java -jar Sauce-Connect.jar <!-- SAUCE:USERNAME --> <!-- SAUCE:ACCESS_KEY -->
+```
 
 Since we already configured the Sauce credentials in an earlier tutorial,
 Sauce Connect starts up without further ado. It takes a while to load because
@@ -31,6 +33,7 @@ are good to go.
 To update your tests to run using Sauce Connect, you will need to change the URL used to create the WebDriver instance to point to localhost:4445 instead of ondemand.saucelabs.com:80, eg.
 
 <!-- SAUCE:LOGIN -->
+
 ```java
 this.driver = new RemoteWebDriver(
         new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@localhost:4445/wd/hub"),
