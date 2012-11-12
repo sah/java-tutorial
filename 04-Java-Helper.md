@@ -75,7 +75,7 @@ The class implements the `com.saucelabs.common.SauceOnDemandSessionIdProvider` i
 be implemented.
 
 ```java
-public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("<your-user-name>", "<your-access-key>");
+public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("<!-- SAUCE:USERNAME -->", "<!-- SAUCE:ACCESS_KEY -->");
 
 public @Rule
 SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
