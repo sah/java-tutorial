@@ -11,7 +11,7 @@ access to your local network. Sauce Connect sessions are sandboxed
 from outside data flows and are a convenient way to securely test apps that
 aren't ready to be deployed on the Internet.
 
-![Sauce Connect](https://raw.github.com/saucelabs/java-tutorial/master/Diagram-Connect.png?login=jlipps&token=bd2ba4272c3899aa616f60ee70c0d128)
+![Sauce Connect](##Diagram-Connect.png##)
 
 To install Sauce Connect, [download](https://saucelabs.com/downloads/Sauce-Connect-latest.zip) the zip file and extract it to your filesystem.
 
