@@ -1,10 +1,10 @@
-Setting up your system to use Sauce with Java
+Setting Up Your System to Use Sauce with Java
 =====
 
-We recommend using [Maven](http://maven.apache.org) to build your project and either the [JUnit](http://www.junit.org) or [TestNG](http://www.testng.org) libraries to write Selenium tests. 
+We recommend using [Maven](http://maven.apache.org) to build your project and either the [JUnit](http://www.junit.org) or the [TestNG](http://www.testng.org) libraries to write Selenium tests. 
 
-While neither Maven, JUnit or TestNG are required
-to use Sauce, this tutorial will assume that this is our framework.
+While neither Maven, JUnit nor TestNG are required
+to use Sauce, this is the framework that we'll use for this tutorial.
 
 Although this tutorial is not a comprehensive guide for getting Java and Maven set up on
 your system, here are some guidelines:
@@ -15,7 +15,7 @@ Java and Maven Setup for Mac and Linux
 
 Download and install [Java](http://www.java.com/en/download/index.jsp) if it isn't already installed on your system.
 
-Go to the [Maven download](http://maven.apache.org/download.html) page to download the Maven binary distribution and extract it to your file system.  Add the `bin` directory to your path, eg.
+Go to the [Maven download](http://maven.apache.org/download.html) page to download the Maven binary distribution and extract it to your file system.  Add the `bin` directory to your path, for example, 
 
 	export PATH=YOUR_MAVEN_PATH/bin:$PATH
 
@@ -29,7 +29,7 @@ Java and Maven Setup for Windows
 
 Download and install [Java](http://www.java.com/en/download/index.jsp) if it isn't already installed on your system.
 
-Go to the [Maven download](http://maven.apache.org/download.html) page to download the Maven binary distribution and extract it to your file system.  Add the `bin` directory to your path, eg.
+Go to the [Maven download](http://maven.apache.org/download.html) page to download the Maven binary distribution and extract it to your file system.  Add the `bin` directory to your path, for example, 
 
 ```bash
 set PATH=YOUR_MAVEN_PATH/bin:%PATH%
@@ -45,15 +45,15 @@ set PATH=YOUR_MAVEN_PATH/bin:%PATH%
 First, let's create a project directory that we'll use for this tutorial:
 
 ```bash
-mkdir ~/sauce-tutorial && cd ~/sauce-tutorial
+mkdir ~/sauce-java-tutorial && cd ~/sauce-java-tutorial
 ```
 
-Now we can a Maven command to download and install a sample project using your username and Sauce access key. You can
+Now we execute a Maven command to download and install a sample project using your Sauce username and your Sauce access key. You can
 find your Sauce access key on your [Sauce account page](https://saucelabs.com/account).
 
 <!-- SAUCE:LOGIN -->
 
-To create a JUnit-based project, run:
+To create a JUnit based project, run:
 
 ```bash
 mvn archetype:generate \
@@ -65,7 +65,7 @@ mvn archetype:generate \
 -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 ```
 
-To create a TestNG-based project, run:
+To create a TestNG based project, run:
 	
 ```bash
 mvn archetype:generate \
@@ -77,7 +77,7 @@ mvn archetype:generate \
 -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 ```
 
-You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg sauce-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the ~sauce-tutorial directory.
+You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, sauce-java-tutorial), version (defaults to 1.0.0-SNAPSHOT), and package (default to the group id).  Once these values are entered, the sample project files will be created in the ~sauce-tutorial directory.
 
 <!-- SAUCE:END_PLATFORM -->
 
@@ -86,27 +86,33 @@ You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg 
 ---
 First, let's create a project directory that we'll use for this tutorial:
 
-    C:\> mkdir C:\sauce-tutorial
+    C:\> mkdir C:\sauce-java-tutorial
 
-Now we can a Maven command to download and install a sample project using your username and Sauce access key. You can
+Now we execute a Maven command to download and install a sample project using your Sauce username and Sauce access key. You can
 find your Sauce access key on your [Sauce account page](https://saucelabs.com/account).
 
-To create a JUnit-based project, run:
+**JUnit**
 
-	C:\> cd C:\sauce-tutorial
+To create a JUnit based project, execute the following commands:
 
-	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release 	-DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=1.0.7 -DsauceUserName=<!-- SAUCE:USERNAME --> 	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+	C:\> cd C:\sauce-java-tutorial
 
-To create a TestNG-based project, run:
+	C:\sauce-java-tutorial>mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release 	-DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=1.0.7 -DsauceUserName=<!-- SAUCE:USERNAME --> 	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+
+You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, sauce-java-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the `C:\sauce-java-tutorial` directory.
+
+**TestNG**
+
+To create a TestNG based project, execute the following commands:
 	
 	C:\> cd C:\sauce-tutorial
 
 	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release 	-DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=1.0.7	-DsauceUserName=<!-- SAUCE:USERNAME -->	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
-You will be prompted to enter a group id (eg. com.yourcompany), artifact id (eg sauce-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the C:\sauce-tutorial directory.
+You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, sauce-java-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the `C:\sauce-java-tutorial` directory.
 
 <!-- SAUCE:END_PLATFORM -->
 
-Now, you're all set up!
+You're all set up!
 
 * _Next_: [Running your first test](##03-First-Test.md##)
