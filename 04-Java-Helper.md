@@ -1,10 +1,13 @@
-Using the Java Helper library
+Using the Java Helper Library
 ====
-The [Java helper library](https://github.com/saucelabs/sauce-java) adds some extra features to the running of tests using Sauce OnDemand, while only requiring minimal changes to the test class.  There are separate JUnit and TestNG versions of the Java helper library, which are included as dependencies in the Maven pom file when the archetype generation is performed.
+The [Java helper library](https://github.com/saucelabs/sauce-java) provides additional test functionality when 
+using Sauce OnDemand (like pass/fail reporting), and it only requires minimal changes to the test class. There are 
+JUnit and TestNG versions of the Java helper library. You include the version you are using as a dependency in the 
+Maven pom file.
 
 **JUnit**
 
-The Java helper libraries are included in the project by virtue of the following dependency in the pom.xml file:
+To include the Java helper libraries in a JUnit project, add the following dependency to the pom.xml file:
 
 ```xml
 <dependency>
@@ -15,7 +18,9 @@ The Java helper libraries are included in the project by virtue of the following
 </dependency>
 ```
 
-In addition to the WebDriver.java class, the Maven archetype will create a class which demonstrates how to update a test to use the Java helper library.  This class is located in the `src/test/java/com/yourcompany/WebDriverWithHelperTest.java` file:
+In addition to the WebDriver.java class, Maven creates a class that demonstrates how to update 
+tests to use the Java helper library. You can find this class in the 
+`src/test/java/com/yourcompany/WebDriverWithHelperTest.java` file:
 
 <!-- SAUCE:LOGIN -->
 ```java
@@ -41,8 +46,7 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
         capabillities.setCapability("platform", Platform.XP);
         capabillities.setCapability("name",  testName.getMethodName());
         this.driver = new RemoteWebDriver(
-                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabillities);
+                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"), capabillities);
         this.sessionId = ((RemoteWebDriver)driver).getSessionId().toString();
     }
 
@@ -71,8 +75,8 @@ This WebDriverWithHelperTest is fundamentally the same as the WebDriverTest clas
 public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
 ```
 
-The class implements the `com.saucelabs.common.SauceOnDemandSessionIdProvider` interface, which requires that a `getSessionId()` method
-be implemented.
+The WebDriverWithHelperTest fclass implements the `com.saucelabs.common.SauceOnDemandSessionIdProvider` interface, 
+which requires that a `getSessionId()` method be implemented.
 
 ```java
 public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("<!-- SAUCE:USERNAME -->", "<!-- SAUCE:ACCESS_KEY -->");
@@ -81,14 +85,21 @@ public @Rule
 SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
 
 ```
-The `com.saucelabs.common.SauceOnDemandAuthentication` instance will be created with your Sauce OnDemand user name and access key, which will 
-in turn be used to create the `com.saucelabs.junit.SauceOnDemandTestWatcher` instance.
 
-The SauceOnDemandTestWatcher instance will invoke the [Sauce REST API](http://saucelabs.com/docs/rest) to mark the Sauce Job as passed or failed if the JUnit test passes or fails.  It will also output the Sauce OnDemand session id to the stdout so that the Sauce plugins for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) can parse the session id.
+Your Sauce OnDemand user name and Sauce access key are passed as parameters to the 
+`com.saucelabs.common.SauceOnDemandAuthentication` constructor. The reference that is returned is passed 
+as a parameter to the `com.saucelabs.junit.SauceOnDemandTestWatcher` constructor. (You can find your 
+Sauce access key on your [Sauce account page](https://saucelabs.com/account).)
+
+The SauceOnDemandTestWatcher instance invokes the [Sauce REST API](http://saucelabs.com/docs/rest) to identify the 
+Sauce job as passed or failed if the JUnit test passes or fails. It also outputs the Sauce OnDemand session id 
+to stdout so the Sauce plugins for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) 
+and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) 
+can parse the session id.
 
 **TestNG**
 
-The Java helper libraries are included in the project by virtue of the following dependency in the pom.xml file:
+To include the Java helper libraries in a TestNG project, add the following dependency to the pom.xml file:
 
 ```xml
 <dependency>
@@ -99,7 +110,9 @@ The Java helper libraries are included in the project by virtue of the following
 </dependency>
 ```
 
-As per the JUnit example, the TestNG Maven archetype will also create a class which demonstrates how to update a test to use the Java helper library.  This class is located in the `src/test/java/com/yourcompany/WebDriverWithHelperTest.java` file:
+As with the JUnit example, the TestNG Maven archetype creates a class that demonstrates how to update tests 
+to use the Java helper library.  This class is located in the 
+`src/test/java/com/yourcompany/WebDriverWithHelperTest.java` file:
 
 ```java
 @Listeners({SauceOnDemandTestListener.class})
@@ -111,17 +124,17 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, 
 
     @Parameters({"username", "key", "os", "browser", "browserVersion"})
     @BeforeMethod
-    public void setUp(@Optional("<!-- SAUCE:USERNAME -->") String username,
-                      @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
-                      @Optional("mac") String os,
-                      @Optional("iphone") String browser,
-                      @Optional("5.0") String browserVersion,
-                      Method method) throws Exception {
+    public void setUp
+        (@Optional("<!-- SAUCE:USERNAME -->") String username,
+              @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
+              @Optional("mac") String os,
+              @Optional("iphone") String browser,
+              @Optional("5.0") String browserVersion, Method method) throws Exception {
 
         if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(key)) {
-           authentication = new SauceOnDemandAuthentication(username, key);
+            authentication = new SauceOnDemandAuthentication(username, key);
         } else {
-           authentication = new SauceOnDemandAuthentication();
+            authentication = new SauceOnDemandAuthentication();
         }
 
         DesiredCapabilities capabillities = new DesiredCapabilities();
@@ -130,8 +143,7 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, 
         capabillities.setCapability("platform", Platform.valueOf(os));
         capabillities.setCapability("name", method.getName());
         this.driver = new RemoteWebDriver(
-                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabillities);
+            new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"), capabillities);
     }
 
     @Override
@@ -158,13 +170,19 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, 
 }
 ```
 
-This class too is fundamentally the same as the WebDriverTest class, with a couple of additions.
+This WebDriverWithHelperTest class is fundamentally the same as the WebDriverTest class, with a couple of additions:
 
 ```java
 @Listeners({SauceOnDemandTestListener.class})
 public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 ```
 
-The class is annotated with the `org.testng.annotations.Listeners` annotation, which includes the `com.saucelabs.testng.SauceOnDemandTestListener` class.  The SauceOnDemandTestListener class will invoke the [Sauce REST API](http://saucelabs.com/docs/rest) to mark the Sauce Job as passed or failed if the test passes or fails.  It will also output the Sauce OnDemand session id to the stdout so that the Sauce plugins for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) can parse the session id.
+The WebDriverWithHelperTest class is annotated with the `org.testng.annotations.Listeners` annotation `@Listeners`, which includes the 
+`com.saucelabs.testng.SauceOnDemandTestListener` class. The SauceOnDemandTestListener class invokes 
+the [Sauce REST API](http://saucelabs.com/docs/rest) which marks the Sauce job as passed or failed if the test 
+passes or fails.  It also outputs the Sauce OnDemand session id to stdout so the Sauce plugins 
+for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) 
+and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) 
+can parse the session id.
 
-* _Next_: [Testing local apps with Sauce Connect](##05-Sauce-Connect.md##)
+* _Next_: [Running tests against web applications](##04-Testing-Apps.md##)
