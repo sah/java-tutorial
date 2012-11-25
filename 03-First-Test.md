@@ -1,12 +1,12 @@
 Running Your First Test
 =====
 
-Now that you've got a Maven project created, let's run the tests that were created by the Maven archetype 
-generation to make sure that everything works.
+Now that you've got a JUnit or TestNG Maven project created, let's run the tests that were created by the Maven 
+archetype generation to make sure that everything works.
 
 **Mac/Linux/Windows**
 
-Run the following command from your `sauce-java-tutorial` directory:
+Run the following command from your `sauce-tutorial` directory:
 
     mvn test
 
@@ -29,16 +29,17 @@ output instantaneously, but soon you'll see output similar to the following:
 Right now each test runs one at a time because the sample project created by the archetype isn't setup to run multiple 
 tests in parallel, however we'll show how to enable parallel testing in one of our later tutorials. 
 
-Try running the tests again by executing `mvn test`. While the tests are running, navigate to your [Sauce Labs tests page](https://saucelabs.com/tests) 
+Try running the tests again by executing `mvn test`. While the tests are running, navigate to your 
+[Sauce Labs tests page](https://saucelabs.com/tests) 
 to see each test as it queues, runs, and finishes. Click on a running test on your tests page. You'll jump to a detail 
-view where, if you caught the test while it was running, you can watch Selenium controlling the browser. When the test 
-finishes, the page updates with a video of the test and a list of the Selenium commands that were sent.
+view where, if you caught the test while it was running you can watch Selenium controlling the browser. When the test 
+finishes the page updates with a video of the test and a list of the Selenium commands that were sent.
 
 If you don't catch a test while it's running, you can click the test's link on the 
-[Sauce Labs tests page](https://saucelabs.com/tests) to see the test's details and video.
+[Sauce Labs tests page](https://saucelabs.com/tests) to see the video and the test's details.
 
 Now that you know that your setup worked and you were able to run your first
-test suite on the Sauce Labs cloud of Selenium servers, let's look at what actually happened under the hood. 
+test suite on the Sauce Labs cloud, let's look at what actually happened under the hood. 
 
 If you open the `src/test/java/com/yourcompany/WebDriverTest.java` file in your text editor, this is what you'll see:
 
@@ -79,7 +80,7 @@ public class WebDriverTest {
 Let's break down this `WebDriverTest` class block by block. 
 * The `setUp()` method runs before every test in the class by virtue of the JUnit `org.junit.Before` annotation `@Before`. 
 * Next we create an `org.openqa.selenium.remote.DesiredCapabilities` instance populated with the desired browser version 
-and platform.
+and desired platform.
 * Then we create an `org.openqa.selenium.remote.RemoteWebDriver` instance with two parameters: the DesiredCapabilities 
 instance and a URL that points to `ondemand.saucelabs.com:80/wd/hub`.
 
@@ -95,14 +96,14 @@ instance and a URL that points to `ondemand.saucelabs.com:80/wd/hub`.
     }
 ```
 
-Here's our first test! As with all test methods, this method uses the JUnit `org.junit.Test` annotation `@Test`. 
+Here's our first test! As with all JUnit test methods, this test method uses the JUnit `org.junit.Test` annotation `@Test`. 
 
 This test accesses www.amazon.com and uses the JUnit `assertEquals` method to test whether or not the page title 
 contains the string "Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more". 
 In the world of [Java and WebDriver](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/WebDriver.html#getTitle()), 
 calling `driver.getTitle()` tells the Selenium session to return the title of the currently loaded page, and 
-`assertEquals` compares the secified page title with the returned page title and returns true if they are the same 
-and false if they are different.
+`assertEquals` compares the secified page title with the returned page title. Nothing happens if the titles are 
+the same, but if the titles are different an exception is raised.
 
 
 ```java
@@ -126,7 +127,10 @@ annotation `@After`. Then we call `driver.quit()` to close the Selenium session.
 
 **TestNG**
 
-The `WebDriverTest` class created for TestNG looks very similar to the JUnit class:
+The `WebDriverTest` class created for TestNG looks very similar to the JUnit class. The main difference is that the 
+TestNG class supplies the information for the desired browser settings as parameters using the 
+`org.testng.annotations.Parameters` annotation `@Parameters` and the `org.testng.annotations.Optional` 
+annotation `@Optional`.
 
 ```java
 public class WebDriverTest {
@@ -165,11 +169,7 @@ public class WebDriverTest {
 }
 ```
 
-The main difference is that the TestNG class supplies the information for the desired browser settings as parameters 
-using the `org.testng.annotations.Parameters` annotation `@Parameters` and the `org.testng.annotations.Optional` 
-annotation `@Optional`.
-
-This WebDriverTest.java demonstrated a basic Selenium test using JUnit/TestNG, now lets look at 
+This WebDriverTest.java demonstrated a basic Selenium test using JUnit and TestNG, now lets look at 
 WebDriverWithHelperTest.java.
 
 * _Next_: [Using the Java Helper library](##04-Java-Helper.md##)
