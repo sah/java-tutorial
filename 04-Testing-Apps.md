@@ -322,4 +322,4 @@ All we're doing is using Selenium to input values and make sure that the app's r
 Simple as they are, these signup/login/logout tests are extremely valuable. Running them before every deployment 
 helps to ensure that you can welcome new users into your community and get them where they need to go.
 
-* _Next_: [Using the Sauce Java helper libraries](##04-Java-Helper.md##)
+* _Next_: [Testing local apps with Sauce Connect](##05-Sauce-Connect.md##)
