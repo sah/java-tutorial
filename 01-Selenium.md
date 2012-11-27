@@ -14,8 +14,7 @@ someone to click around on a web page to make sure that it works.
 Selenium comes in two parts:
 
 1. A server that listens for commands from your test script.
-2. A set of browser extensions (called Drivers) that enable a browser to be
-remotely controlled by the server.
+2. A set of browser extensions (called Drivers) that enable a Selenium server to remotely control a browser.
 
 The Selenium server is actually an HTTP server, which makes talking to it easy
 and available to any programming language with a good HTTP library (like Java).
@@ -64,6 +63,6 @@ iPad, and various Android devices.
 
 Enough about us! Let's get your system set up to run Selenium scripts on the Sauce Labs cloud.
 
-* _Next_: [Setting up your system to use Sauce with Java](##02-Setup.md##)
+* _Next_: [Setting up Java for Sauce](##02-Setup.md##)
 
 
