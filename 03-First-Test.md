@@ -11,7 +11,8 @@ Run the following command from your `sauce-tutorial` directory:
     mvn test
 
 This launches Maven and downloads the dependencies, compiles the source code, and runs the tests on the Sauce Labs 
-cloud of Selenium servers. After a few moments you'll see that JUnit or TestNG has started. You might not see any 
+cloud of Selenium servers. There are quite a few files to download so this may take a few minutes, then you'll see 
+that JUnit or TestNG has started. You might not see any 
 output instantaneously, but soon you'll see output similar to the following:
 
 	------------------------------------------------------
