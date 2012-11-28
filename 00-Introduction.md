@@ -18,9 +18,7 @@ installed on your system. If you need to get that set up, check out the
 
 Run your first test suite
 ---
-Now that Maven is installed and your archetype is created, let's run our first suite of tests in parallel,
-with the following command (`paratest` is simply a wrapper around PHPUnit that
-allows us to run multiple sessions in parallel):
+Now that Maven is installed and your archetype is created, let's run our tests:
 
 <!-- SAUCE:INCLUDE:run_maven -->
 
