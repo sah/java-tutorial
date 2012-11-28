@@ -4,27 +4,7 @@ Running your first test
 Now that you've got a Maven project created, let's try run the tests that were created by the archetype generation 
 to make sure that everything works.
 
-Run this command from your `sauce-tutorial` directory:
-
-    mvn test
-
-**Mac/Linux/Windows:**
-
-This launches Maven and will download the dependencies, compiles the source code and run the tests. After a few 
-moments you should see that JUnit/TestNG has started. You might not see any output instantaneously, but
-eventually you will see the following output:
-
-	------------------------------------------------------
-	 T E S T S
-	-------------------------------------------------------
-	Running WebDriverTest
-	Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.384 sec
-	Running WebDriverWithHelperTest
-	Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.743 sec
-
-	Results :
-
-	Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+<!-- SAUCE:INCLUDE:run_maven -->
 
 While the tests are running, navigate to your [Sauce Labs tests page](https://saucelabs.com/tests). 
 From there you'll be able to see each test as it queues, runs, and finishes.

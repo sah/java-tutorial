@@ -52,6 +52,19 @@ If the user is not logged in, you can generate an inline signup form with:
 
     <!-- SAUCE:LOGIN -->
 
+It's possible to reuse markdown code in multiple tutorial files. For example,
+if I have a file in `include/reuse-me.md`, I can have it generated in
+a tutorial markdown file like so:
+
+    ... some text ...
+    <!-- SAUCE:INCLUDE:reuse-me -->
+    ... more text ...
+
+When the file is rendered on Sauce's website, the contents of
+`include/reuse-me.md` will be inserted (before any other processing) in that
+location. Note that "include/" and ".md" are part of the convention and are
+assumed.
+
 Contributing
 ----
 
@@ -65,3 +78,4 @@ Authors
 
 *  Jonathan Lipps ([jlipps](http://github.com/jlipps/))
 *  Ross Rowe ([rossrowe](http://github.com/rossrowe/))
+*  Bernie Cohen ([rubarb](http://github.com/rubarb/))
