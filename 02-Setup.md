@@ -1,4 +1,4 @@
-Setting Up Java, Maven, and JUnit or TestNG for Sauce
+Setting Up Java for Sauce
 =====
 
 We suggest that you consider using [Maven](http://maven.apache.org) to build your Java project and either the 
@@ -6,17 +6,17 @@ We suggest that you consider using [Maven](http://maven.apache.org) to build you
 Maven, JUnit nor TestNG are required to write Java tests for Sauce, this is the framework that we'll use for this 
 tutorial.
 
-Although this tutorial is not a comprehensive guide for getting Java, Maven, JUnit and TestNG set up on your system, 
+Although this tutorial is not a comprehensive guide for setting up Java, Maven, JUnit and TestNG on your system, 
 here are some guidelines:
 
 <!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
 Java and Maven Setup for Mac and Linux
 ---
 
-Download and install [Java](http://www.java.com/en/download/index.jsp) if it isn't already installed on your system.
+[Download](http://www.java.com/en/download/index.jsp) and install Java if it isn't already installed on your system.
 
-Download the [Maven](http://maven.apache.org/download.html) binary distribution and extract it to your file system, 
-then add the Maven `bin` directory to your path, for example, 
+[Download](http://maven.apache.org/download.html) and install the Maven binary distribution and extract it to your 
+file system, then add the Maven `bin` directory to your path, for example, 
 
     export PATH=YOUR_MAVEN_PATH/bin:$PATH
 
@@ -28,14 +28,14 @@ then add the Maven `bin` directory to your path, for example,
 Java and Maven Setup for Windows
 ---
 
-Download and install [Java](http://www.java.com/en/download/index.jsp) if it isn't already installed on your system.
+[Download](http://www.java.com/en/download/index.jsp) and install Java if it isn't already installed on your system.
 
-Download the [Maven](http://maven.apache.org/download.html) binary distribution and extract it to your file system, 
-then add the Maven `bin` directory to your path, for example, 
+[Download](http://maven.apache.org/download.html) and install the Maven binary distribution and follow the installation 
+instructions to extract it to your file system. 
 
-```bash
-set PATH=YOUR_MAVEN_PATH/bin:%PATH%
-```
+Next, follow the Maven installation instructions to add:
+* The appropriate user environment variables and PATH for Maven.
+* The user environment variable and system Path for Java.
 
 * Continue to [Maven project setup for Windows](#maven_win)
 
@@ -101,7 +101,7 @@ To create a JUnit based project, execute the following commands:
 
     C:\>cd C:\sauce-tutorial
 
-    C:\sauce-tutorial>mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release     -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=1.0.10 -DsauceUserName=<!-- SAUCE:USERNAME -->  -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+    C:\sauce-tutorial>mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=1.0.10 -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
 You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, 
 sauce-tutorial), version (defaults to 1.0.10-SNAPSHOT) and package (defaults to the group id). 
@@ -111,9 +111,9 @@ Once these values are entered, the sample project files are created in the `C:\s
 
 To create a TestNG based project, execute the following commands:
     
-    C:\> cd C:\sauce-tutorial
+    C:\>cd C:\sauce-tutorial
 
-    C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release     -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=1.0.10 -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+    C:\sauce-tutorial>mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=1.0.10 -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
 You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, 
 sauce-tutorial), version (defaults to 1.0.10-SNAPSHOT) and package (defaults to the group id). 
