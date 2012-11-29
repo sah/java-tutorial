@@ -13,7 +13,7 @@ To include the Java helper libraries in a JUnit project, add the following depen
 <dependency>
     <groupId>com.saucelabs</groupId>
     <artifactId>sauce_junit</artifactId>
-    <version>1.0.10</version>
+    <version>4.10</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -29,9 +29,16 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
     public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
 				"<!-- SAUCE:USERNAME -->", "<!-- SAUCE:ACCESS_KEY -->");
 
+    /**
+     * JUnit Rule that will mark the Sauce Job as passed/failed when the test succeeds or fails.
+     */
     public @Rule
     SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
 
+    /**
+     * JUnit Rule that will record the test name of the current test. This is referenced when creating the 
+     * {@link DesiredCapabilities}, so the Sauce Job is created with the test name.
+     */
     public @Rule TestName testName = new TestName();
 
     private WebDriver driver;
@@ -70,18 +77,17 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
 ```
 
 The `WebDriverWithHelperTest` class is fundamentally the same as the WebDriverTest class, with a couple of additions. 
-It implements the `com.saucelabs.common.SauceOnDemandSessionIdProvider` interface, 
-which requires that a `getSessionId()` method be implemented:
+It implements the Sauce `SauceOnDemandSessionIdProvider` interface, which requires that a `getSessionId()` method 
+be implemented:
 
 
 ```java
 public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
 ```
 
-Pass your Sauce user name and Sauce access key as parameters to the 
-`com.saucelabs.common.SauceOnDemandAuthentication` constructor. The object that is returned is passed 
-as a parameter to the `com.saucelabs.junit.SauceOnDemandTestWatcher` constructor. You can find your 
-Sauce access key on your [Sauce account page](https://saucelabs.com/account).
+Pass your Sauce user name and Sauce access key as parameters to the `SauceOnDemandAuthentication` constructor. The 
+object that is returned is passed as a parameter to the `SauceOnDemandTestWatcher` constructor. (You can find your 
+Sauce access key on your [Sauce account page](https://saucelabs.com/account).)
 
 ```java
 public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("<!-- SAUCE:USERNAME -->", "<!-- SAUCE:ACCESS_KEY -->");
@@ -105,7 +111,7 @@ To include the Java helper libraries in a TestNG project, add the following depe
 <dependency>
     <groupId>com.saucelabs</groupId>
     <artifactId>sauce_testng</artifactId>
-    <version>1.0.10</version>
+    <version>5.14</version>
     <scope>test</scope>
 </dependency>
 ```
