@@ -56,12 +56,11 @@ public class WebDriverTest {
     @Before
     public void setUp() throws Exception {
 
-        DesiredCapabilities capabillities = DesiredCapabilities.firefox();
-        capabillities.setCapability("version", "5");
-        capabillities.setCapability("platform", Platform.XP);
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("version", "5");
+        capabilities.setCapability("platform", Platform.XP);
         this.driver = new RemoteWebDriver(
-                new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"),
-                capabillities);
+                new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabilities);
     }
 
     @Test
@@ -79,25 +78,25 @@ public class WebDriverTest {
 ```
 
 Let's break down this `WebDriverTest` class block by block. 
-* The `setUp()` method runs before every test in the class by virtue of the JUnit `org.junit.Before` annotation `@Before`. 
-* Next we create an `org.openqa.selenium.remote.DesiredCapabilities` instance populated with the desired browser version 
-and desired platform.
-* Then we create an `org.openqa.selenium.remote.RemoteWebDriver` instance with two parameters: the DesiredCapabilities 
+* The `setUp()` method runs before every test in the class by virtue of the JUnit annotation `@Before`. 
+* Next we create a Selenium `DesiredCapabilities` instance populated with the desired browser version 
+and the desired platform.
+* Then we create a Selenium `RemoteWebDriver` instance with two parameters: the DesiredCapabilities 
 instance and a URL that points to `ondemand.saucelabs.com:80/wd/hub`.
 
 ```java
     @Before
     public void setUp() throws Exception {
 
-    DesiredCapabilities capabillities = DesiredCapabilities.firefox();
-    capabillities.setCapability("version", "5");
-    capabillities.setCapability("platform", Platform.XP);
+    DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+    capabilities.setCapability("version", "17");
+    capabilities.setCapability("platform", Platform.XP);
     this.driver = new RemoteWebDriver(
-        new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabillities);
+        new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabilities);
     }
 ```
 
-Here's our first test! As with all JUnit test methods, this test method uses the JUnit `org.junit.Test` annotation `@Test`. 
+Here's our first test! As with all JUnit test methods, this test method uses the JUnit `Test` annotation `@Test`. 
 
 This test accesses www.amazon.com and uses the JUnit `assertEquals` method to test whether or not the page title 
 contains the string "Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more". 
@@ -115,7 +114,7 @@ the same, but if the titles are different an exception is raised.
 	}
 ```
 
-The `tearDown()` method runs after every test in the class if finished by virtue of the JUnit `org.junit.After` 
+The `tearDown()` method runs after every test in the class is finished by virtue of the JUnit `After` 
 annotation `@After`. Then we call `driver.quit()` to close the Selenium session.
 
 ```java
@@ -129,9 +128,8 @@ annotation `@After`. Then we call `driver.quit()` to close the Selenium session.
 **TestNG**
 
 The `WebDriverTest` class created for TestNG looks very similar to the JUnit class. The main difference is that the 
-TestNG class supplies the information for the desired browser settings as parameters using the 
-`org.testng.annotations.Parameters` annotation `@Parameters` and the `org.testng.annotations.Optional` 
-annotation `@Optional`.
+TestNG class supplies the information for the desired browser settings as parameters using the TestNG
+`Parameters` annotation `@Parameters` and the TestNG `Optional` annotation `@Optional`.
 
 ```java
 public class WebDriverTest {
@@ -143,17 +141,17 @@ public class WebDriverTest {
     public void setUp(
         @Optional("<!-- SAUCE:USERNAME -->") String username,
         @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
-        @Optional("mac") String os,
-        @Optional("iphone") String browser,
-        @Optional("5.0") String browserVersion, Method method) throws Exception {
+        @Optional("XP") String os,
+        @Optional("firefox") String browser,
+        @Optional("17.0") String browserVersion, Method method) throws Exception {
 
-            DesiredCapabilities capabillities = new DesiredCapabilities();
-            capabillities.setBrowserName(browser);
-            capabillities.setCapability("version", browserVersion);
-            capabillities.setCapability("platform", Platform.valueOf(os));
-            capabillities.setCapability("name", method.getName());
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(browser);
+            capabilities.setCapability("version", browserVersion);
+            capabilities.setCapability("platform", Platform.valueOf(os));
+            capabilities.setCapability("name", method.getName());
             this.driver = new RemoteWebDriver(
-                new URL("http://" + username + ":" + key + "@ondemand.saucelabs.com:80/wd/hub"), capabillities);
+                new URL("http://" + username + ":" + key + "@ondemand.saucelabs.com:80/wd/hub"), capabilities);
         }
 
     @Test
@@ -170,7 +168,7 @@ public class WebDriverTest {
 }
 ```
 
-This WebDriverTest.java demonstrated a basic Selenium test using JUnit and TestNG, now lets look at 
+WebDriverTest.java class demonstrates a basic Selenium test using JUnit and TestNG, now lets look at 
 WebDriverWithHelperTest.java.
 
 * _Next_: [Using the Java Helper library](##04-Java-Helper.md##)
