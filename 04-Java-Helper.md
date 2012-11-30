@@ -50,7 +50,7 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider {
 
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("version", "17");
-        capabilities.setCapability("platform", Platform.XP);
+        capabilities.setCapability("platform", Platform.XP); // Note: XP is tested as Windows 2003 Server on the Sauce Cloud
         capabilities.setCapability("name",  testName.getMethodName());
         this.driver = new RemoteWebDriver(
                 new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"), capabilities);
@@ -130,12 +130,13 @@ public class WebDriverWithHelperTest implements SauceOnDemandSessionIdProvider, 
 
     @Parameters({"username", "key", "os", "browser", "browserVersion"})
     @BeforeMethod
+    // Note: XP is tested as Windows 2003 Server on the Sauce Cloud
     public void setUp
         (@Optional("<!-- SAUCE:USERNAME -->") String username,
             @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
-            @Optional("mac") String os,
-            @Optional("iphone") String browser,
-            @Optional("5.0") String browserVersion, Method method) throws Exception {
+            @Optional("XP") String os,
+            @Optional("Firefox") String browser,
+            @Optional("17") String browserVersion, Method method) throws Exception {
 
         if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(key)) {
             authentication = new SauceOnDemandAuthentication(username, key);
