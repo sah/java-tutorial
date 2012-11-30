@@ -64,6 +64,7 @@ public class WebDriverTest {
 
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("version", "17");
+        // Note: XP is tested as Windows 2003 Server on the Sauce Cloud
         capabilities.setCapability("platform", Platform.XP);
         this.driver = new RemoteWebDriver(
                 new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabilities);
@@ -96,6 +97,7 @@ instance and a URL that points to `ondemand.saucelabs.com:80/wd/hub`.
 
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
     capabilities.setCapability("version", "17");
+    // Note: XP is tested as Windows 2003 Server on the Sauce Cloud
     capabilities.setCapability("platform", Platform.XP);
     this.driver = new RemoteWebDriver(
         new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabilities);
@@ -144,6 +146,7 @@ public class WebDriverTest {
 	 
     @Parameters({"username", "key", "os", "browser", "browserVersion"})
     @BeforeMethod
+    // Note: XP is tested as Windows 2003 Server on the Sauce Cloud
     public void setUp(
         @Optional("<!-- SAUCE:USERNAME -->") String username,
         @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
