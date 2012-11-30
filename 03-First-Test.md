@@ -13,19 +13,25 @@ Run the following command from your `sauce-tutorial` directory:
 This launches Maven and downloads the dependencies, compiles the source code, and runs the tests on the Sauce Labs 
 cloud of Selenium servers. There are quite a few files to download so this may take a few minutes, then you'll see 
 that JUnit or TestNG has started. You might not see any 
-output instantaneously, but soon you'll see output similar to the following:
-
-	------------------------------------------------------
-	 T E S T S
-	-------------------------------------------------------
-	Running WebDriverTest
-	Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.384 sec
-	Running WebDriverWithHelperTest
-	Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.743 sec
-
-	Results :
-
-	Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+output instantaneously, but in a couple of minutes you'll see output similar to the following:
+    
+    -------------------------------------------------------
+    T E S T S
+    -------------------------------------------------------
+    Running WebDriverDemoShootoutTest
+    Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 137.922 sec
+    Running WebDriverTest
+    Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.297 sec
+    Running WebDriverWithHelperTest
+    Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.156 sec
+    
+    Results :
+    
+    Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+    
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
 
 Right now each test runs one at a time because the sample project created by the archetype isn't setup to run multiple 
 tests in parallel, however we'll show how to enable parallel testing in one of our later tutorials. 
@@ -57,7 +63,7 @@ public class WebDriverTest {
     public void setUp() throws Exception {
 
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        capabilities.setCapability("version", "5");
+        capabilities.setCapability("version", "17");
         capabilities.setCapability("platform", Platform.XP);
         this.driver = new RemoteWebDriver(
                 new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabilities);
@@ -143,7 +149,7 @@ public class WebDriverTest {
         @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
         @Optional("XP") String os,
         @Optional("firefox") String browser,
-        @Optional("17.0") String browserVersion, Method method) throws Exception {
+        @Optional("17") String browserVersion, Method method) throws Exception {
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
