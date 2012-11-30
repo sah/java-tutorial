@@ -79,8 +79,9 @@ mvn archetype:generate \
 -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 ```
 
-You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, 
-sauce-tutorial), version (defaults to 1.0.10-SNAPSHOT), and package (defaults to the group id).  
+You will be prompted to enter a group id (for example, com.yourcompany), artifact id (this is the directory that
+the files will be created in, for example 
+sauce-tutorial), version (defaults to 1.0-SNAPSHOT), and package (defaults to the group id).  
 Once these values are entered, the sample project files are created in the `sauce-tutorial` directory.
 
 <!-- SAUCE:END_PLATFORM -->
@@ -115,8 +116,9 @@ To create a TestNG based project, execute the following commands:
 
     C:\sauce-tutorial>mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=1.0.10 -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
-You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, 
-sauce-tutorial), version (defaults to 1.0.10-SNAPSHOT) and package (defaults to the group id). 
+You will be prompted to enter a group id (for example, com.yourcompany), artifact id (this is the directory that
+the files will be created in, for example, 
+sauce-tutorial), version (defaults to 1.0-SNAPSHOT) and package (defaults to the group id). 
 Once these values are entered, the sample project files are created in the `C:\sauce-tutorial` directory.
 
 <!-- SAUCE:END_PLATFORM -->
