@@ -3,7 +3,7 @@ Running Tests Against Web Applications
 
 Testing a static sandbox is one thing. Testing a real application's functionality
 is another. In this tutorial we'll run Selenium tests against a real live app sitting
-on the web to test signup and login
+on the web to test signup, login and logout 
 behaviours. Once we're done you'll have a good idea how to write Selenium
 tests for signup and login and you'll have a general understanding
 of how to test other site functionality as well.
