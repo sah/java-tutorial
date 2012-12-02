@@ -2,8 +2,8 @@ Running Tests Against Web Applications
 ====
 
 Testing a static sandbox is one thing. Testing a real application's functionality
-is another. In this tutorial we'll run tests against a real live app sitting
-on the web -- we'll look at Selenium tests for signup and login
+is another. In this tutorial we'll run Selenium tests against a real live app sitting
+on the web to test signup and login
 behaviours. Once we're done you'll have a good idea how to write Selenium
 tests for signup and login and you'll have a general understanding
 of how to test other site functionality as well.
@@ -20,9 +20,8 @@ The Test Class
 ---
 
 A `src/test/java/com/yourcompany/WebDriverDemoShootout.java` file was created in your `sauce-tutorial` directory by 
-the Maven archetype. It's reproduced below. You can run these 8 tests before or after we discuss them, 
-and you can view them in your [Sauce Labs tests page](https://saucelabs.com/tests) just like you did during the first 
-test.
+Maven. It's reproduced below. We ran these 8 tests previously
+and you can view them in your [Sauce Labs tests page](https://saucelabs.com/tests).
 
 ```java
 public class WebDriverDemoShootoutTest {
@@ -34,7 +33,7 @@ public class WebDriverDemoShootoutTest {
     @Before
     public void setUp() throws Exception {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        capabilities.setCapability("version", "5");
+        capabilities.setCapability("version", "17");
         capabilities.setCapability("platform", Platform.XP);
         this.driver = new RemoteWebDriver(
                 new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"), capabilities);
