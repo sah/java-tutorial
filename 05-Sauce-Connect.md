@@ -17,8 +17,9 @@ aren't ready to be deployed on the Internet.
 To install Sauce Connect, [download](https://saucelabs.com/downloads/Sauce-Connect-latest.zip) the Sauce Connect 
 zip file and extract it to your filesystem.
 
-Sauce Connect is a fairly large binary file, so it may take a little while to download. After it finishes downloading, 
-unzip the zip file and run the following command from the directory in which the `Sauce-Connect.jar` file is located:
+Sauce Connect is a fairly large binary file, so it may take a little while to download. After you 
+unzip the zip file, and execute the following command from the directory that contains the extracted files (the  
+directory that contains the `Sauce-Connect.jar` file):
 
 ```bash
 java -jar Sauce-Connect.jar <!-- SAUCE:USERNAME --> <!-- SAUCE:ACCESS_KEY -->
@@ -40,6 +41,8 @@ this.driver = new RemoteWebDriver(
 
 Note: When Sauce Connect is running, all tests that you run using your Sauce Labs account use the network on the machine 
 on which Sauce Connect is located.
+
+To exit Sauce Connect, enter `Ctrl-C`.
 
 For more information about Sauce Connect, or to download and configure the
 Java binary on your own, see the [Sauce Connect documentation](https://saucelabs.com/docs/connect).
