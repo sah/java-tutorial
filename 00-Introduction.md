@@ -1,4 +1,4 @@
-Sauce Labs, Selenium WebDriver, and Java Tutorials
+The Sauce Labs, Selenium WebDriver, and Java Tutorials
 ============
 These tutorials explain how to use Java test classes to run automated Selenium WebDriver tests on the Sauce Labs cloud of Selenium servers. 
 
