@@ -93,12 +93,12 @@ lines of code around.
 
 Use WebDriverWait
 ----
-One issue with Selenium is that it doesn't know when it's supposed to wait 
-before executing the next command. When people click a submit button, 
-they know not to check for text or try another action until the next page 
+Selenium doesn't know when it's supposed to wait 
+before executing the next command. When users click a submit button, 
+they know not to try another action until the next page 
 loads. Selenium, however, immediately executes the next command. If 
 the next command is part of an assertion in your code the assertion may 
-fail, even though if Selenium had waited a little bit longer it would have succeeded.
+fail, even though if Selenium had waited a little bit longer the assertion would have succeeded.
 
 The solution is to use 
 [WebDriverWait](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/support/ui/WebDriverWait.html), 
