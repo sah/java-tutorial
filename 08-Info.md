@@ -15,7 +15,7 @@ Documentation
 *   [Sauce Labs available browsers](http://saucelabs.com/docs/browsers)
 *   [Sauce Connect](http://saucelabs.com/docs/connect)
 *   [Sauce Labs REST API](http://saucelabs.com/docs/rest)
-*   The [Selenium JSON Wire Protocol](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element) (useful to see all the different commands WebDriver supports)
+*   The [Selenium JSON Wire Protocol](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element) (useful to see all the commands that WebDriver supports)
 
 Suggested Articles
 ---
