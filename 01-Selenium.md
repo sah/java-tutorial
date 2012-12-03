@@ -1,5 +1,5 @@
-How Selenium WebDriver and Sauce Labs Work
-=============
+Introduction to Selenium WebDriver and Sauce Labs
+===
 
 [Selenium](http://seleniumhq.org) is a technology that allows programmers to
 send commands to web browsers to make them perform tasks as
