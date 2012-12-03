@@ -1,4 +1,4 @@
-Setting Up Java for Sauce
+Setting Up Java and Maven for Sauce
 =====
 
 We suggest that you consider using [Maven](http://maven.apache.org) to build your Java project and either the 
