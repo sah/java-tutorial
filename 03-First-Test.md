@@ -6,7 +6,8 @@ archetype generation to make sure that everything works.
 
 **Mac/Linux/Windows**
 
-Run the following command from your `sauce-tutorial` directory:
+Run the following command from your `sauce-tutorial` directory: 
+<!-- SAUCE:LOGIN -->
 
     mvn test
 
