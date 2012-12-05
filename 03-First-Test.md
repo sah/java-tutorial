@@ -38,12 +38,12 @@ public class WebDriverTest {
     @Before
     public void setUp() throws Exception {
 
-        DesiredCapabilities capabillities = DesiredCapabilities.firefox();
-        capabillities.setCapability("version", "5");
-        capabillities.setCapability("platform", Platform.XP);
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("version", "5");
+        capabilities.setCapability("platform", Platform.XP);
         this.driver = new RemoteWebDriver(
                 new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"),
-                capabillities);
+                capabilities);
     }
 
     @Test
@@ -66,12 +66,12 @@ Let's break this test class down, chunk by chunk:
 	@Before
 	public void setUp() throws Exception {
 
-    	DesiredCapabilities capabillities = DesiredCapabilities.firefox();
-	    capabillities.setCapability("version", "5");
-	    capabillities.setCapability("platform", Platform.XP);
+    	DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+	    capabilities.setCapability("version", "5");
+	    capabilities.setCapability("platform", Platform.XP);
 	    this.driver = new RemoteWebDriver(
 	            new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"),
-	            capabillities);
+	            capabilities);
 	}
 ```
 
@@ -122,14 +122,14 @@ public class WebDriverTest {
                       @Optional("5.0") String browserVersion,
                       Method method) throws Exception {
 
-        DesiredCapabilities capabillities = new DesiredCapabilities();
-        capabillities.setBrowserName(browser);
-        capabillities.setCapability("version", browserVersion);
-        capabillities.setCapability("platform", Platform.valueOf(os));
-        capabillities.setCapability("name", method.getName());
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName(browser);
+        capabilities.setCapability("version", browserVersion);
+        capabilities.setCapability("platform", Platform.valueOf(os));
+        capabilities.setCapability("name", method.getName());
         this.driver = new RemoteWebDriver(
                 new URL("http://" + username + ":" + key + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabillities);
+                capabilities);
     }
 
     @Test

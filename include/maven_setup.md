@@ -28,7 +28,7 @@ To create a JUnit based project, run:
 	-DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release \
 	-DarchetypeGroupId=com.saucelabs \
 	-DarchetypeArtifactId=quickstart-webdriver-junit \
-	-DarchetypeVersion=1.0.11 \
+	-DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> \
 	-DsauceUserName=<!-- SAUCE:USERNAME --> \
 	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 ```
@@ -40,7 +40,7 @@ To create a TestNG based project, run:
 	-DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release \
 	-DarchetypeGroupId=com.saucelabs \
 	-DarchetypeArtifactId=quickstart-webdriver-testng \
-	-DarchetypeVersion=1.0.11 \
+	-DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> \
 	-DsauceUserName=<!-- SAUCE:USERNAME --> \
 	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 ```
@@ -74,7 +74,7 @@ To create a JUnit based project, execute the following commands:
 
 	C:\> cd C:\sauce-java-tutorial
 
-	C:\sauce-java-tutorial>mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release 	-DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=1.0.11 -DsauceUserName=<!-- SAUCE:USERNAME --> 	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+	C:\sauce-java-tutorial>mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
 You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, sauce-java-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the `C:\sauce-java-tutorial` directory.
 
@@ -84,7 +84,7 @@ To create a TestNG based project, execute the following commands:
 	
 	C:\> cd C:\sauce-tutorial
 
-	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release 	-DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=1.0.11 -DsauceUserName=<!-- SAUCE:USERNAME -->	-DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 
 You will be prompted to enter a group id (for example, com.yourcompany), artifact id (for example, sauce-java-tutorial), version (defaults to 1.0.0-SNAPSHOT) and package (default to the group id).  Once these values are entered, the sample project files will be created in the `C:\sauce-java-tutorial` directory.
 
