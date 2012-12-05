@@ -1,8 +1,8 @@
-Running your first test
+Running Your First Test
 =====
 
-Now that you've got a Maven project created, let's try run the tests that were created by the archetype generation 
-to make sure that everything works.
+Now that you've got a JUnit or TestNG Maven project created, let's run the tests that were created by the Maven 
+archetype generation to make sure that everything works.
 
 <!-- SAUCE:INCLUDE:run_maven -->
 

@@ -1,5 +1,5 @@
-How Selenium WebDriver and Sauce Labs work
-=============
+Introduction to Selenium WebDriver and Sauce Labs
+===
 
 [Selenium](http://seleniumhq.org) is a technology that allows programmers to
 send commands to web browsers to make them perform tasks as
@@ -14,8 +14,7 @@ someone to click around on a web page to make sure that it works.
 Selenium comes in two parts:
 
 1. A server that listens for commands from your test script.
-2. A set of browser extensions (called Drivers) that enable a browser to be
-remotely controlled by the server.
+2. A set of browser extensions (called Drivers) that enable a Selenium server to remotely control a browser.
 
 The Selenium server is actually an HTTP server, which makes talking to it easy
 and available to any programming language with a good HTTP library (like Java).
@@ -26,7 +25,7 @@ There is one wrinkle, however, due to the history of Selenium's development.
 There are currently two versions of Selenium in use by developers: Selenium 1
 (also known as Selenium RC) and Selenium 2 (also known as Selenium WebDriver).
 In this tutorial we'll be talking exclusively about WebDriver, so make sure
-if you do any googling about these topics that you know which version of
+if you do any research about these topics that you know which version of
 Selenium is being discussed.
 
 Selenium can be visualized like this:
@@ -35,10 +34,10 @@ Selenium can be visualized like this:
 
 In this diagram, all of the components (the Java test class, the Selenium server,
 and the browsers with the Selenium extensions installed) run on your computer
-(or on a computer in your locally-accessible network). Your script (written
-in one of the Selenium libraries for PHP) sends commands to the Selenium
-server, which relays them to whichever browsers you have available and active.
-The results are relayed back from the browser, through the Selenium server, and
+(or on a computer in your locally-accessible network). Your code (written
+in one of the Selenium libraries for Java) sends commands to the Selenium
+server, which relays them to the browsers you have available and active.
+The results are relayed back from the browsers, through the Selenium server, and
 to your code so you can determine whether a given test was successful or not.
 
 While all of these tools are free and open source, it can sometimes be quite
@@ -57,13 +56,13 @@ in the Sauce Labs cloud. Check out this diagram:
 ![Sauce architecture](##Diagram-Sauce.png##)
 
 The only difference when using Sauce Labs to run your Selenium scripts is that
-the Internet is the communication layer between your Java class and the
+the Internet is the communication layer between your Java code and the
 Selenium server. In addition, you have access to a much broader range of browsers than
 you would have on your local machine, including mobile devices like the iPhone,
 iPad, and various Android devices.
 
-Enough about us! Let's get your system set up to run Selenium scripts on Sauce Labs.
+Enough about us! Let's get your system set up to run Selenium scripts on the Sauce Labs cloud.
 
-* _Next_: [Setting up your system to use Sauce with Java](##02-Setup.md##)
+* _Next_: [Setting up Java for Sauce](##02-Setup.md##)
 
 

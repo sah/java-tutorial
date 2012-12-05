@@ -1,8 +1,8 @@
-Next steps and more information
+Next Steps and More Information
 ======
 
-Congratulations! You've successfully finished the Sauce Labs + Java tutorial. Now you can write Selenium tests 
-for your apps and run them in the Sauce Labs cloud. 
+Congratulations! You've successfully finished the Sauce Labs Java tutorial. Now you can write Selenium tests 
+for your apps and run them on the Sauce Labs cloud. 
 
 Here are some links that you might find useful as you continue on your journey to Selenium mastery.
 
@@ -15,15 +15,17 @@ Documentation
 *   [Sauce Labs available browsers](http://saucelabs.com/docs/browsers)
 *   [Sauce Connect](http://saucelabs.com/docs/connect)
 *   [Sauce Labs REST API](http://saucelabs.com/docs/rest)
-*   The [Selenium JSON Wire Protocol](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element) (useful to see all the different commands WebDriver supports)
+*   The [Selenium JSON Wire Protocol](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element) (useful to see all the commands that WebDriver supports)
 
-Suggested articles
+Suggested Articles
 ---
-* More on [WebDriverWait](http://automatingsoftwaretesting.wordpress.com/2011/09/17/why-webdriverwait-thread-sleep/)
-* More on [CSS vs XPath](http://sauceio.com/index.php/2011/05/why-css-locators-are-the-way-to-go-vs-xpath/)
-* More on [finding and fixing flakey tests](http://sauceio.com/index.php/2012/09/using-sauce-breakpoints-to-find-and-fix-flakey-tests/)
+Here are some articles on relevant topics for further reading:
 
-Manual testing
+* [WebDriverWait](http://automatingsoftwaretesting.wordpress.com/2011/09/17/why-webdriverwait-thread-sleep/)
+* [CSS vs. XPath](http://sauceio.com/index.php/2011/05/why-css-locators-are-the-way-to-go-vs-xpath/)
+* [Finding and fixing flakey tests](http://sauceio.com/index.php/2012/09/using-sauce-breakpoints-to-find-and-fix-flakey-tests/)
+
+Manual Testing
 ---
 This tutorial discussed automated testing. However, sometimes it's useful to manually run a test on a version 
 of a browser that you don't have on your system so you can quickly troubleshoot a pesky issue. 

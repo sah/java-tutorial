@@ -1,28 +1,27 @@
-Running tests against web applications
+Running Tests Against Web Applications
 ====
 
 Testing a static sandbox is one thing. Testing a real application's functionality
-is another. In this tutorial we'll run tests against a real live app sitting
-on the web. Specifically, we'll look at Selenium tests for signup and login
+is another. In this tutorial we'll run Selenium tests against a real live app sitting
+on the web to test signup, login and logout 
 behaviours. Once we're done you'll have a good idea how to write Selenium
-tests for login and signup in your own app, and you'll have a general understanding
+tests for signup and login and you'll have a general understanding
 of how to test other site functionality as well.
 
-The test app
+The Test App
 ---
 
-We have a demo app set up at [http://tutorialapp.saucelabs.com](http://tutorialapp.saucelabs.com) that we can run 
+We have a [demo app](http://tutorialapp.saucelabs.com) set up that we can run 
 Selenium scripts against. It's a web-based "idea competition" demo app called 
 [Shootout](https://github.com/Pylons/shootout). Shootout is a voting platform for ideas designed for the Pyramid Python 
 web framework. We won't test voting functionality in this demo, but feel free to play around with it.
 
-The test class
+The Test Class
 ---
 
-A `src/test/java/com/yourcompany/WebDriverDemoShootout.java` file should have been created in your `sauce-tutorial` directory by the Maven archetype. It's
-reproduced below. However, you can run these 8 tests before we examine them, 
-and you can view them in your [Sauce Labs tests page](https://saucelabs.com/tests) just like we did during the first 
-test:
+A `src/test/java/com/yourcompany/WebDriverDemoShootout.java` file was created in your `sauce-tutorial` directory by 
+Maven. It's reproduced below. We ran these 8 tests previously
+and you can view them in your [Sauce Labs tests page](https://saucelabs.com/tests).
 
 ```java
 public class WebDriverDemoShootoutTest {
@@ -33,12 +32,11 @@ public class WebDriverDemoShootoutTest {
 
     @Before
     public void setUp() throws Exception {
-        DesiredCapabilities capabillities = DesiredCapabilities.firefox();
-        capabillities.setCapability("version", "5");
-        capabillities.setCapability("platform", Platform.XP);
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("version", "17");
+        capabilities.setCapability("platform", Platform.XP);
         this.driver = new RemoteWebDriver(
-                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabillities);
+                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"), capabilities);
         driver.get("http://tutorialapp.saucelabs.com");
     }
 
@@ -183,7 +181,7 @@ private Map<String, String> createRandomUser() {
 }
 ```
 
-The next three methods are helper functions for our tests. If we were testing
+The `doRegister`, `doLogin` and `doLogout` methods are helper functions for our tests. If we were testing
 a local app, it would be more efficient to perform these actions on the
 server-side than to have Selenium generate states of being logged in, logged out,
 etc. However, since we're testing an app on the Internet whose backend is inaccessible
@@ -257,7 +255,7 @@ public void testLogout() throws Exception {
 ```
 
 Then we test Shootout's signup functionality by using the
-registration helper function to create a new user, then we assert that the
+registration helper function to create a new user and assert that the
 user is logged in (which happens after a successful registration).
 
 ```java
@@ -269,8 +267,8 @@ public void testRegister() throws Exception {
 }
 ```
 
-And finally we have a set of tests for validation logic in the signup form. First we test that each of the required fields results in an error on signup 
-if the field is empty. Next we test if a mismatched password and password
+And finally we have a set of tests for validation logic in the signup form. First we test that each of the required 
+fields results in an error on signup if the field is empty. Next we test if a mismatched password and password
 confirmation generate the desired error, and then we test to make sure that the app doesn't allow a successful 
 registration if various incorrect email formats are used.
 
@@ -317,13 +315,10 @@ public void testRegisterFailsWithBadEmail() throws Exception {
 }
 ```
 
-Now you have a basic
-conceptual framework that you can use to start writing tests for your apps. 
+Now you have a basic conceptual framework that you can use to start writing tests for your apps. 
 
-All we're doing is 
-using Selenium to input values and make sure that the app's response is
-exactly what we want. Simple as they are, these login/signup tests are extremely valuable. 
-Running them before every deployment will help ensure that you can 
-welcome new users into your community and get them where they need to go.
+All we're doing is using Selenium to input values and make sure that the app's response is exactly what we want. 
+Simple as they are, these signup/login/logout tests are extremely valuable. Running them before every deployment 
+helps to ensure that you can welcome new users into your community and get them where they need to go.
 
-* _Next_: [Using the Sauce Java Helper libraries](##04-Java-Helper.md##)
+* _Next_: [Testing local apps with Sauce Connect](##05-Sauce-Connect.md##)
