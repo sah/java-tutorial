@@ -21,6 +21,8 @@ Sauce Connect is a fairly large binary file, so it may take a little while to do
 unzip the zip file, and execute the following command from the directory that contains the extracted files (the  
 directory that contains the `Sauce-Connect.jar` file):
 
+<!-- SAUCE:LOGIN -->
+
 ```bash
 java -jar Sauce-Connect.jar <!-- SAUCE:USERNAME --> <!-- SAUCE:ACCESS_KEY -->
 ```
@@ -31,7 +33,6 @@ to handle the secure connection. When it says "Connected! You may start your tes
 To update your tests to run using Sauce Connect, you will need to change the URL used to create the WebDriver instance 
 to point to `localhost:4445` instead of `ondemand.saucelabs.com:80` as shown below:
 
-<!-- SAUCE:LOGIN -->
 
 ```java
 this.driver = new RemoteWebDriver(
