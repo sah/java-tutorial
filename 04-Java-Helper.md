@@ -14,7 +14,7 @@ already created by Maven for this tutorial):
 <dependency>
     <groupId>com.saucelabs</groupId>
     <artifactId>sauce_junit</artifactId>
-    <version>4.10</version>
+    <version><!-- SAUCE:PROP:sauce-java-version --></version>
     <scope>test</scope>
 </dependency>
 ```
@@ -116,7 +116,7 @@ was automatically created by Maven for this tutorial):
 <dependency>
     <groupId>com.saucelabs</groupId>
     <artifactId>sauce_testng</artifactId>
-    <version>5.14</version>
+    <version><!-- SAUCE:PROP:sauce-java-version --></version>
     <scope>test</scope>
 </dependency>
 ```
