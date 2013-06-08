@@ -2,42 +2,43 @@ Sauce Labs, Selenium WebDriver, and Java Tutorials
 ============
 
 Ready to get your project up and running with Selenium WebDriver and Sauce
-Labs? You've come to the right place. If you are new to Selenium, you might
-want to jump down and have a look at the [complete tutorial](#complete).
+Labs? You've come to the right place.
 
-We will be using [Maven](http://maven.apache.org) Java 6 and Junit 4 in this 
+We will be using [Maven](http://maven.apache.org), [Java 6]() and [Junit 4]() in this 
 example. However Sauce Labs is framework agnostic and works great with any 
-combination of tools you choose to write your tests in.
+combination of tools and frameworks you choose to write your tests in.
 
 After we've set ourselves up, your tests will look something like this:
 ```java
-//Example code here
-    @Before
-    public void setUp() throws Exception {
-        this.caps.setCapability("name", this.testName.getMethodName());
-        this.driver = new RemoteWebDriver(
-                new URL("http://<username>:<key>@ondemand.saucelabs.com:80/wd/hub"),
-                this.caps);
-    }
+/*
+ * Work in progress
+*/
+@Before
+public void setUp() throws Exception {
+    this.caps.setCapability("name", this.testName.getMethodName());
+    this.driver = new RemoteWebDriver(
+	    new URL("http://<username>:<key>@ondemand.saucelabs.com:80/wd/hub"),
+	    this.caps);
+}
 
-    @Test
-    public void checkRamenInventorMention() {
-        driver.get("http://en.wikipedia.org/");
+@Test
+public void checkRamenInventorMention() {
+    driver.get("http://en.wikipedia.org/");
 
-        WebElement searchInput = driver.findElement(By.id("searchInput"));
-        searchInput.sendKeys("Ramen");
-        
-        WebElement button = driver.findElement(By.id("searchButton"));
-        button.click();
+    WebElement searchInput = driver.findElement(By.id("searchInput"));
+    searchInput.sendKeys("Ramen");
 
-        String source = driver.getPageSource();
-        assertThat(source, containsString("Momofuku Ando"));
-    }
+    WebElement button = driver.findElement(By.id("searchButton"));
+    button.click();
 
-    @After
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
+    String source = driver.getPageSource();
+    assertThat(source, containsString("Momofuku Ando"));
+}
+
+@After
+public void tearDown() throws Exception {
+    driver.quit();
+}
 ```
 
 Your tests are run in real browsers on a real operating system, in a dedicated, single-use VM.
@@ -48,33 +49,134 @@ We're working on making this tutorial as clear, simple, and relevant
 as possible. If you run into any problems, or have questions or
 suggestions, please don't hesitate to email help@saucelabs.com!
 
-What You'll Need
-----------------
 
-You will want the dependencies section of your pom.xml to look something like this:
-```xml
-  <dependencies>
-    ...
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-remote-driver</artifactId>
-      <version>2.32.0</version>
-    </dependency>
-    ...
-  </dependencies>
+Getting started
+---
+
+Let us start by running the following command.
+
+```shell 
+$ mvn archetype:generate
 ```
 
-Setting up Surefire
-___________________
-Run ```shell mvn archetype:generate``` to create your project.
+Feel free to use your own lovingly crafted archetype, we will be using the default archetype 
+in this example. 
 
-<!-- SAUCE:INCLUDE:maven_setup -->
+Then tis time to delve into harsh beauty of xml. Open up the project's pom.xml in your 
+favorite editor and make the following amendments if necessary.
+
+Firstly, you will want the dependencies section of your pom.xml to look something like this:
+```xml
+<dependencies>
+  ...
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.11</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-remote-driver</artifactId>
+    <version>2.32.0</version>
+  </dependency>
+  ...
+</dependencies>
+```
+
+And the build section should be similar to this:
+```xml
+<build>    
+  ...
+  <plugins>
+    ...
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>2.14.1</version>
+      <configuration>
+	<parallel>both</parallel>
+	<threadCount>10</threadCount>
+      </configuration>
+    </plugin>
+    ...
+  </plugins>
+  ...
+</build>
+```
+
+Setting up your environment
+---
+
+<!-- SAUCE:LOGIN -->
+
+We recomend keeping your Sauce Labs credentials as environment variables. No more checking in your credentials by error!
+
+<!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
+To do this open the configuration file for your shell (`~/.bash_profile` for bash) and add the following lines:
+
+```bash
+export SAUCE_USERNAME=<!-- SAUCE:USERNAME -->
+export SAUCE_ACCESS_KEY=<!-- SAUCE:ACCESS_KEY -->
+```
+
+After that re-load the configuration by `source`-ing the configuration file (`source ~/.bash_profile` for bash). 
+<!-- SAUCE:END_PLATFORM --> 
+
+<!-- SAUCE:BEGIN_PLATFORM:WIN|WINDOWS -->
+Open your environment variables settings window (Instructions [here](http://www.itechtalk.com/thread3595.html)) and set the following variables:
+```
+Name: SAUCE_USERNAME
+Value: <!-- SAUCE:USERNAME -->
+
+Name: SAUCE_ACCESS_KEY
+Value:  <!-- SAUCE:ACCESS_KEY -->
+```
+<!-- SAUCE:END_PLATFORM --> 
+
+Writting your tests
+---
+Yea! Our setup is finished, now to test writting!
+
+First to set up our target os/browser combos (did I just say no more setting up?) 
+```java
+@Parameterized.Parameters()
+public static Collection<Object[]> data() {
+    LinkedList<Object[]> data = new LinkedList<Object[]>();
+
+    DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+    capabilities.setCapability("version", "21");
+    capabilities.setCapability("platform", Platform.XP);
+    data.add(new Object[]{capabilities});
+
+    capabilities = DesiredCapabilities.firefox();
+    capabilities.setCapability("version", "21");
+    capabilities.setCapability("platform", Platform.LINUX);
+    data.add(new Object[] {capabilities} );
+
+    capabilities = DesiredCapabilities.firefox();
+    capabilities.setCapability("version", "21");
+    capabilities.setCapability("platform", Platform.MAC);
+    data.add(new Object[] {capabilities} );
+
+    return data;
+}
+```
+
+```java
+public SauceOnDemandAuthentication auth = new SauceOnDemandAuthentication();
+@Rule public TestName testName = new TestName();
+
+...
+
+@Before
+public void setUp() throws Exception {
+    this.caps.setCapability("name", this.testName.getMethodName());
+    this.driver = new RemoteWebDriver(
+		      new URL("http://"+auth.getUsername()+":"+auth.getAccessKey()+"@ondemand.saucelabs.com:80/wd/hub"),
+					      this.caps);
+}
+```
 
 Run your first test suite
 ---
@@ -167,18 +269,11 @@ public class WebDriverTest {
 
 
 A few things to note:
-
-1.  This is a basic test which uses the JUnit/TestNG test annotations.  The `src/test/java/com/yourcompany/WebDriverWithHelperTest.java`
-	which is covered in the [Java Helper](##04-Java-Helper.md##) section of the tutorial
-    is where all of our Sauce-specific functionality comes from (like test
-    pass/fail reporting, automatic test naming, etc...)
-2.  We tell Sauce the browser and platform we want to use by setting . (To see all
+*   We tell Sauce the browser and platform we want to use by setting . (To see all
     the different possibilities, check out Sauce's
     [browsers](https://saucelabs.com/docs/browsers) page).
 
-And that's all we need to do to get the test suite running on Sauce! If you're
-interested in the details of the test functions themselves, check out the
-[First Test](##03-First-Test.md##) section of the complete tutorial.
+And that's all we need to do to get the test suite running on Sauce! 
 
 Wrapping up and next steps
 ---
@@ -202,14 +297,3 @@ interface in your operating system, and the fundamentals of automated testing.
 However, even if this is your first time working with Java and automated testing
 you should be able to successfully follow these step-by-step instructions.
 
-Let's get started! Click the first link below.
-
-* [How Selenium WebDriver and Sauce Labs work](##01-Selenium.md##)
-* [Setting up your system to use Sauce with Java](##02-Setup.md##)
-* [Running your first test](##03-First-Test.md##)
-* [Running tests against web applications](##04-Testing-Apps.md##)
-* [Using the Sauce Java Helper libraries](##04-Java-Helper.md##)
-* [Testing local apps with Sauce Connect](##05-Sauce-Connect.md##)
-* [Running tests in parallel](##06-Parallelism.md##)
-* [Tips for better Selenium test performance](##07-Tips.md##)
-* [Next steps and more information](##08-Info.md##)
