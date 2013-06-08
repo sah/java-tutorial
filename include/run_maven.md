@@ -1,11 +1,9 @@
-Run this command from your `sauce-tutorial` directory:
+Run this command from your project directory:
 
-    mvn test
-
-**Mac/Linux/Windows:**
+    $ mvn test
 
 This launches Maven and will download the dependencies, compiles the source code and run the tests. After a few 
-moments you should see that JUnit/TestNG has started. You might not see any output instantaneously, but
+moments you should see that testing has started. You might not see any output instantaneously, but
 eventually you will see the following output:
 
 	------------------------------------------------------
