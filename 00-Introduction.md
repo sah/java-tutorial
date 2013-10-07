@@ -106,87 +106,18 @@ for you! The sample tests are in the directory
 `WebDriverTest.java` to see how we set up a test suite.
 
 This test primarily demonstrates the setup and teardown process. The
-`setUp` method initializes the browser testing environment by specifying the
+`setUp()` method initializes the browser testing environment by specifying the
 browser, version, and platform to test, then creates a
 `RemoteWebDriver` to run the tests remotely. The test simply requests a
 page and makes one assertion.
 
 **JUnit**
 
-```java
-public class WebDriverTest {
-
-    private WebDriver driver;
-
-    @Before
-    public void setUp() throws Exception {
-        // Choose the browser, version, and platform to test
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        capabilities.setCapability("version", "5");
-        capabilities.setCapability("platform", Platform.XP);
-        // Create the connection to Sauce Labs to run the tests
-        this.driver = new RemoteWebDriver(
-                new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"),
-                capabilities);
-    }
-
-    @Test
-    public void webDriver() throws Exception {
-        // Make the browser get the page and check its title
-        driver.get("http://www.amazon.com/");
-        assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more", driver.getTitle());
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
-
-}
-```
+<!-- SAUCE:INCLUDE:junit_basic_test -->
 
 **TestNG**
 
-```java
-public class WebDriverTest {
-
-   	private WebDriver driver;
-
-    @Parameters({"username", "key", "os", "browser", "browserVersion"})
-    @BeforeMethod
-    public void setUp(@Optional("<!-- SAUCE:USERNAME -->") String username,
-                      @Optional("<!-- SAUCE:ACCESS_KEY -->") String key,
-                      @Optional("mac") String os,
-                      @Optional("iphone") String browser,
-                      @Optional("5.0") String browserVersion,
-                      Method method) throws Exception {
-
-        // Choose the browser, version, and platform to test
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName(browser);
-        capabilities.setCapability("version", browserVersion);
-        capabilities.setCapability("platform", Platform.valueOf(os));
-        capabilities.setCapability("name", method.getName());
-        // Create the connection to Sauce Labs to run the tests
-        this.driver = new RemoteWebDriver(
-                new URL("http://" + username + ":" + key + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabilities);
-    }
-
-    @Test
-    public void webDriver() throws Exception {
-        // Make the browser get the page and check its title
-        driver.get("http://www.amazon.com/");
-        assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more", driver.getTitle());
-    }
-
-    @AfterMethod
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
-
-}
-```
+<!-- SAUCE:INCLUDE:testng_basic_test -->
 
 And that's it! The [Java Helper](##04-Java-Helper.md##) section of the
 tutorial explains more Sauce functionality you can use in your
