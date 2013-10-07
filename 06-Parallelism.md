@@ -1,25 +1,43 @@
 Running Tests in Parallel
 =====
 
-As you may recall from earlier tutorials, Selenium tests can take a long time! They may take even longer on Sauce 
-because we start each test on a new virtual machine that has never been used before (don't worry, we don't charge 
+As you may recall from earlier tutorials, Selenium tests can take a long time! They may take even longer on Sauce
+because we start each test on a new virtual machine that has never been used before (don't worry, we don't charge
 you for the spin-up time).
 
 To make tests run faster, run more than one test at a time. Since we have thousands of
 clean virtual machines on standby, we encourage you to run as many tests
-as you can at once. For an overview of how many tests you can run in parallel, see the parallelization section of the 
+as you can at once. For an overview of how many tests you can run in parallel, see the parallelization section of the
 [Sauce plan page](http://saucelabs.com/pricing).
 
 JUnit
 ===
 
-Tests can be run in parallel using JUnit, but it takes a bit of work. 
-The [Java helper library](https://github.com/saucelabs/sauce-java) includes a `Parallelized` 
+Tests can be run in parallel using JUnit, but it takes a bit of work.
+The [Java helper library](https://github.com/saucelabs/sauce-java) includes a `Parallelized`
 class that creates a dynamic thread pool that holds each thread that is running a test.
 
 **Parallelizing the WebDriverTest Class**
 
-The following `WebDriverParallelTest` class demonstrates how to update the `WebDriverTest` class so its tests run in parallel:
+The following `WebDriverParallelTest` class demonstrates how to update
+the `WebDriverTest` class so its tests run in parallel. The test is
+parallelized by specifying the different parameters to test with, in this
+case the browser and platform. Behind the scenes, the test framework
+creates a different instance of the test class for each set of parameters
+and runs them in parallel. The parameters are passed to the
+constructor so each instance customizes it's behavior using those
+parameters.
+
+In this example, we're parallelizing tests across different browsers
+on different platforms. Since testing an app in Firefox on Linux is
+independent of testing it in Chrome on Windows, we can safely run both
+tests in parallel. The static method `browsersStrings()` is
+annotated with `org.junit.runners.Parameterized.Parameters`,
+indicating it should be used to determine the parameters for each
+instance of the test. The method returns a `LinkedList` of parameters
+to use for each test instance's constructor. The
+`WebDriverParallelTest` constructor captures these
+parameters and `setUp()` uses them to configure the `DesiredCapabilities`.
 
 <!-- SAUCE:LOGIN -->
 ```java
@@ -69,21 +87,31 @@ public class WebDriverParallelTest {
         driver.quit();
     }
 }
-``` 
+```
+
+As shown above (and as included in the sample project) only one
+platform is returned, so only that one test will be run in
+parallel. Let's fix that! Add a few more platforms or browser versions
+(you might need to refer to [the Selenium
+`org.openqa.selenium.Platform`
+docs](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/Platform.html)
+to specify other platforms). Now, when you [run the
+tests](##03-First-Test.md##), you should see these tests running in
+parallel on the [Sauce Labs tests page](https://saucelabs.com/tests).
+
 
 TestNG
 ===
 
-TestNG has built in support for running tests in parallel that is configured by the following line in the 
+TestNG has built in support for running tests in parallel that is configured by the following line in the
 `src\test\resources\xml\testng.xml` file:
 
 ```xml
 <suite name="ParallelTests" verbose="5" parallel="tests" thread-count="10">
 ```
 
-For more information about the options available for running parallel tests using TestNG, see the 
+For more information about the options available for running parallel tests using TestNG, see the
 [TestNG website](http://testng.org/doc/documentation-main.html#parallel-running)
 
 
 * _Next_: [Tips for better Selenium test performance](##07-Tips.md##)
-

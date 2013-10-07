@@ -8,14 +8,7 @@ Here are some links that you might find useful as you continue on your journey t
 
 Documentation
 ---
-*   [Maven](http://maven.apache.org)
-*   [JUnit](http://www.junit.org)
-*   [TestNG](http://www.testng.org)
-*   [Sauce Java helper library](https://github.com/saucelabs/sauce-java)
-*   [Sauce Labs available browsers](http://saucelabs.com/docs/browsers)
-*   [Sauce Connect](http://saucelabs.com/docs/connect)
-*   [Sauce Labs REST API](http://saucelabs.com/docs/rest)
-*   The [Selenium JSON Wire Protocol](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element) (useful to see all the commands that WebDriver supports)
+<!-- SAUCE:INCLUDE:docs -->
 
 Suggested Articles
 ---
