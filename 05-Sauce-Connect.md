@@ -12,13 +12,11 @@ aren't ready to be deployed on the Internet.
 
 ![Sauce Connect](##Diagram-Connect.png##)
 
-**Mac/Linux/Windows**
-
 To install Sauce Connect, [download](https://saucelabs.com/downloads/Sauce-Connect-latest.zip) the Sauce Connect 
 zip file and extract it to your filesystem.
 
 Sauce Connect is a fairly large binary file, so it may take a little while to download. After you 
-unzip the zip file, and execute the following command from the directory that contains the extracted files (the  
+unzip the zip file, and execute the following command from the directory that contains the extracted files (the 
 directory that contains the `Sauce-Connect.jar` file):
 
 <!-- SAUCE:LOGIN -->
