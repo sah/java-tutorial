@@ -2,26 +2,45 @@ Running Tests Against Web Applications
 ====
 
 Testing a static sandbox is one thing. Testing a real application's functionality
-is another. In this tutorial we'll run Selenium tests against a real live app sitting
-on the web to test signup, login and logout 
-behaviours. Once we're done you'll have a good idea how to write Selenium
-tests for signup and login and you'll have a general understanding
-of how to test other site functionality as well.
+is another. In this tutorial we'll run Selenium tests against a real
+live app to test signup, login and logout
+behaviours. When you have finished this tutorial, you'll have a good
+idea how to write Selenium tests for basic, multi-page interactions
+with a web app.
+
 
 The Test App
 ---
 
-We have a [demo app](http://tutorialapp.saucelabs.com) set up that we can run 
-Selenium scripts against. It's a web-based "idea competition" demo app called 
-[Shootout](https://github.com/Pylons/shootout). Shootout is a voting platform for ideas designed for the Pyramid Python 
+Normally, you would test your own web app. For the purposes of this
+tutorial, we provide a [demo app at
+`tutorialapp.saucelabs.com`](http://tutorialapp.saucelabs.com) that
+we can run
+Selenium scripts against. It is an "idea competition" app called
+[Shootout](https://github.com/Pylons/shootout) where users vote for ideas designed for the Pyramid Python
 web framework. We won't test voting functionality in this demo, but feel free to play around with it.
+
 
 The Test Class
 ---
 
-A `src/test/java/com/yourcompany/WebDriverDemoShootout.java` file was created in your `sauce-project` directory by 
-Maven. It's reproduced below. We ran these 8 tests previously
-and you can view them in your [Sauce Labs tests page](https://saucelabs.com/tests).
+The sample project in your `sauce-project` directory includes a test
+for this app, reproduced below. Since you have already run all the
+tests for the project, you have already run these 8 tests. You can
+view them in your [Sauce Labs tests
+page](https://saucelabs.com/tests).
+
+The key idea of Selenium tests is to specify input to the browser and
+make sure the app's response is what we want. In this case, we use
+Selenium to set form input values, such as username and password, and
+then click the submission button and check the output.
+
+The goal of this test is to test login, logout, and registration
+functionality. To do so, we first build a few utilities to make
+testing each of these processes simple. Then, we use these to write
+short tests of both successful and unsuccessful attempts at these
+operations.
+
 
 <!-- SAUCE:LOGIN -->
 ```java
@@ -163,10 +182,7 @@ public class WebDriverDemoShootoutTest {
 }
 ```
 
-You're probably already familiar with a lot of what's going on in this test suite. 
-Let's just take a quick look at some new commands and concepts.
-
-
+Let's start with the utilities.
 The `createRandomUser()` function generates unique random user details for the registration
 and login tests. The randomness is important because it allows our tests to
 run in parallel as many times as we want without fear of collisions.
@@ -183,11 +199,13 @@ private Map<String, String> createRandomUser() {
 }
 ```
 
-The `doRegister`, `doLogin` and `doLogout` methods are helper functions for our tests. If we were testing
-a local app, it would be more efficient to perform these actions on the
-server-side than to have Selenium generate states of being logged in, logged out,
-etc. However, since we're testing an app on the Internet whose backend is inaccessible
-to us, we're using these Selenium commands to put the user into these states.
+The `doRegister()`, `doLogin()` and `doLogout()` issue requests that
+register, login, and logout the user, respectively. Recall that the
+tests, Selenium web browser client, and web app are all running on
+separate servers communicating over the internet. We use Selenium to
+manipulate the browser state (e.g. fill in forms) and submit requests
+(e.g. click the submit button) in order to put the user into these
+states.
 
 ```java
 private void doRegister(Map<String, String> userDetails, boolean logout) {
@@ -219,9 +237,10 @@ private void doRegister(Map<String, String> userDetails, boolean logout) {
 }
 ```
 
-In our first test we make sure that logging in doesn't work with bad username/password
-values by asserting that we get a login failure message when we put in random
-text.
+In our first test, we check that logging in doesn't work with a bad
+username/password. Instead of using the `doLogin()` utility, which
+checks for successful login, we use a similar process but check that
+an error message is returned.
 
 ```java
 @Test
@@ -235,7 +254,8 @@ public void testLoginFailsWithBadCredentials() throws Exception {
 }
 ```
 
-Next we test login and logout functionality. The first test creates a new user
+Next we test normal login and logout functionality using the
+`doLogin()` and `doLogout()` methods. The first test creates a new user
 and uses the `doLogout()` helper method to assert that the logout message
 appears. The second test creates a random user, logs it out, and then uses
 the `doLogin()` helper method to assert that the successful login message
@@ -269,9 +289,9 @@ public void testRegister() throws Exception {
 }
 ```
 
-And finally we have a set of tests for validation logic in the signup form. First we test that each of the required 
+And finally we have a set of tests for validation logic in the signup form. First we test that each of the required
 fields results in an error on signup if the field is empty. Next we test if a mismatched password and password
-confirmation generate the desired error, and then we test to make sure that the app doesn't allow a successful 
+confirmation generate the desired error, and then we test to make sure that the app doesn't allow a successful
 registration if various incorrect email formats are used.
 
 ```java
@@ -317,10 +337,12 @@ public void testRegisterFailsWithBadEmail() throws Exception {
 }
 ```
 
-Now you have a basic conceptual framework that you can use to start writing tests for your apps. 
+As simple as they are, these signup/login/logout tests are extremely
+valuable. Running them before every deployment helps to ensure that
+you can welcome new users into your community and get them where they
+need to go.
 
-All we're doing is using Selenium to input values and make sure that the app's response is exactly what we want. 
-Simple as they are, these signup/login/logout tests are extremely valuable. Running them before every deployment 
-helps to ensure that you can welcome new users into your community and get them where they need to go.
+With this basic conceptual framework, you can start writing tests for
+your apps.
 
 * _Next_: [Testing local apps with Sauce Connect](##05-Sauce-Connect.md##)
