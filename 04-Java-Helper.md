@@ -10,7 +10,8 @@ test that uses it. There is nothing new to add or run here: the rest of this
 page explains how to include the dependency in your own project and use it in
 your tests. However, you can see the effect of using these features on your
 [Sauce Labs tests page](https://saucelabs.com/tests). The tests for the
-`WebDriverWithHelperTest.java` test will be marked as Pass in the Results column,
+`WebDriverWithHelperTest.java` test will have a name specified in the
+Session column and be marked as Pass in the Results column,
 whereas all other tests will simply be marked as Finished.
 
 **JUnit**
@@ -114,6 +115,11 @@ notifies the Sauce environment if the test passed or failed. It also outputs the
 to stdout so the Sauce plugins for [Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) 
 and [Bamboo](https://marketplace.atlassian.com/plugins/com.saucelabs.bamboo.bamboo-sauceondemand-plugin) 
 can parse the session id.
+
+Finally, notice the `testName` rule, which is used when building the
+`DesiredCapabilities`. This lets you specify a name for the test which
+will be included in reports on the Sauce Labs site so you can quickly
+identify which tests are failing.
 
 **TestNG**
 
