@@ -19,7 +19,7 @@ web framework. We won't test voting functionality in this demo, but feel free to
 The Test Class
 ---
 
-A `src/test/java/com/yourcompany/WebDriverDemoShootout.java` file was created in your `sauce-tutorial` directory by 
+A `src/test/java/com/yourcompany/WebDriverDemoShootout.java` file was created in your `sauce-project` directory by 
 Maven. It's reproduced below. We ran these 8 tests previously
 and you can view them in your [Sauce Labs tests page](https://saucelabs.com/tests).
 
