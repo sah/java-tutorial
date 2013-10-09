@@ -8,6 +8,11 @@ behaviours. When you have finished this tutorial, you'll have a good
 idea how to write Selenium tests for basic, multi-page interactions
 with a web app.
 
+If you're already familiar with Selenium, you can safely skip this
+step and move on to [Testing local apps with Sauce
+Connect](##05-Sauce-Connect.md##), which covers Sauce Labs specific
+functionality.
+
 
 The Test App
 ---
@@ -339,12 +344,23 @@ public void testRegisterFailsWithBadEmail() throws Exception {
 }
 ```
 
+Next Steps
+---
+
 As simple as they are, these signup/login/logout tests are extremely
 valuable. Running them before every deployment helps to ensure that
 you can welcome new users into your community and get them where they
 need to go.
 
-With this basic conceptual framework, you can start writing tests for
-your apps.
+If you are new to Selenium, try adding a new test to this suite. For
+example, reuse the registration and login methods to setup a user and
+test the voting functionality. To do so, you will need to try the
+voting functionality for yourself to understand how it *should*
+function. You could test that a logged in user sees voting buttons,
+can click them, and that the next page shows the adjusted scores.
+
+When you are comfortable with writing these types of tests, you can
+move on to learn more about how Sauce Labs lets you do more with
+Selenium.
 
 * _Next_: [Testing local apps with Sauce Connect](##05-Sauce-Connect.md##)

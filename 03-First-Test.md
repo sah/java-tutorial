@@ -102,7 +102,13 @@ This is a very simple test, but the creation of the [`RemoteWebDriver`
 instance](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/remote/RemoteWebDriver.html)
 gives you access to the full power of Selenium.
 
-Now that you know how to create a basic Selenium test, lets see how to
-test against your own web app using additional Selenium functionality.
+
+Next Steps
+---
+
+This test gives you the basic structure for any Selenium test that
+will run on Sauce Labs. Next, let's look at how you can use more
+Selenium functionality to create more realistic tests of your own web
+app.
 
 * _Next_: [Running tests against web applications](##04-Testing-Apps.md##)
