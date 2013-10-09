@@ -119,8 +119,15 @@ page and makes one assertion.
 
 <!-- SAUCE:INCLUDE:testng_basic_test -->
 
-And that's it! The [Java Helper](##04-Java-Helper.md##) section of the
-tutorial explains more Sauce functionality you can use in your
+And that's it! This test can connect to Sauce Labs, run tests
+remotely, and report the results. The `RemoteWebDriver` is a [standard
+Selenium
+interface](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/remote/RemoteWebDriver.html),
+so you can do anything that you could do with a
+local Selenium test. The only code specific to Sauce Labs was the URL
+that makes the test run using a browser on Sauce Labs' servers. The
+[Java Helper](##04-Java-Helper.md##) section of the
+tutorial also explains more Sauce-specific functionality you can use in your
 tests, but let's try running this simple test first.
 
 

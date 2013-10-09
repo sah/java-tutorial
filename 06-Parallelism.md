@@ -94,7 +94,7 @@ platform is returned, so only that one test will be run in
 parallel. Let's fix that! Add a few more platforms or browser versions
 (you might need to refer to [the Selenium
 `org.openqa.selenium.Platform`
-docs](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/Platform.html)
+documentation](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/Platform.html)
 to specify other platforms). Now, when you [run the
 tests](##03-First-Test.md##), you should see these tests running in
 parallel on the [Sauce Labs tests page](https://saucelabs.com/tests).

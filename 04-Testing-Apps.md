@@ -35,11 +35,13 @@ make sure the app's response is what we want. In this case, we use
 Selenium to set form input values, such as username and password, and
 then click the submission button and check the output.
 
-The goal of this test is to test login, logout, and registration
+The goal of this particular test is to verify login, logout, and registration
 functionality. To do so, we first build a few utilities to make
 testing each of these processes simple. Then, we use these to write
 short tests of both successful and unsuccessful attempts at these
-operations.
+operations. Recall that the test code is all standard Selenium
+functionality -- we have only had to request that the Selenium code
+execute on browsers hosted by Sauce Labs.
 
 
 <!-- SAUCE:LOGIN -->
