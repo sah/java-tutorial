@@ -76,7 +76,7 @@ Next, we write a simple test (annotated with org.junit.Test):
 The test accesses www.amazon.com and uses a [JUnit assertion](https://github.com/junit-team/junit/wiki/Assertions)
 to check that the page title has the expected value. The call to
 `driver.getTitle()` is a
-[Selenium WebDriver method](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/WebDriver.html#getTitle())
+[Selenium RemoteWebDriver method](http://selenium.googlecode.com/git/docs/api/java/org/openqa/selenium/remote/RemoteWebDriver.html#getTitle%28%29)
 that tells Selenium to return the title of the
 current page.
 
@@ -98,7 +98,17 @@ parameters using the `org.testng.annotations.Parameters` and
 
 <!-- SAUCE:INCLUDE:testng_basic_test -->
 
-Now that you know how to create a basic Selenium test, lets see how to
-test against your own web app.
+This is a very simple test, but the creation of the [`RemoteWebDriver`
+instance](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/remote/RemoteWebDriver.html)
+gives you access to the full power of Selenium.
+
+
+Next Steps
+---
+
+This test gives you the basic structure for any Selenium test that
+will run on Sauce Labs. Next, let's look at how you can use more
+Selenium functionality to create more realistic tests of your own web
+app.
 
 * _Next_: [Running tests against web applications](##04-Testing-Apps.md##)

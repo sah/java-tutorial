@@ -5,7 +5,11 @@ As you may recall from earlier tutorials, Selenium tests can take a long time! T
 because we start each test on a new virtual machine that has never been used before (don't worry, we don't charge
 you for the spin-up time).
 
-To make tests run faster, run more than one test at a time. Since we have thousands of
+To make tests run faster, run more than one test at a time. As long as
+the tests are independent --- whether you're running the same test
+across different browsers or the tests just don't interact with each
+other --- there should be no problem running them
+simultaneously. Since we have thousands of
 clean virtual machines on standby, we encourage you to run as many tests
 as you can at once. For an overview of how many tests you can run in parallel, see the parallelization section of the
 [Sauce plan page](http://saucelabs.com/pricing).
@@ -94,7 +98,7 @@ platform is returned, so only that one test will be run in
 parallel. Let's fix that! Add a few more platforms or browser versions
 (you might need to refer to [the Selenium
 `org.openqa.selenium.Platform`
-docs](http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/Platform.html)
+documentation](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/Platform.html)
 to specify other platforms). Now, when you [run the
 tests](##03-First-Test.md##), you should see these tests running in
 parallel on the [Sauce Labs tests page](https://saucelabs.com/tests).
@@ -113,5 +117,17 @@ TestNG has built in support for running tests in parallel that is configured by 
 For more information about the options available for running parallel tests using TestNG, see the
 [TestNG website](http://testng.org/doc/documentation-main.html#parallel-running)
 
+Next Steps
+---
+
+Parallelizing tests will make them run significantly faster. It is
+only a little bit of work to parallelize them and it lets you test
+your code for deployment much more quickly. Use parallelization to run
+the same test across many browsers and platforms at once, or just to
+run many tests that are independent simultaneously.
+
+You're almost done! We have covered all the major functionality. Now,
+we'll give you a few tips about how to get the best performance out of
+Selenium and Sauce Labs.
 
 * _Next_: [Tips for better Selenium test performance](##07-Tips.md##)
