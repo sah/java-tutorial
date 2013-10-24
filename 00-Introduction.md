@@ -20,7 +20,7 @@ your Java projects. It also assumes you are using JUnit or TestNG for
 testing.
 
 If you do not have these installed and configured, follow these
-instructions to [setup the requirements](##09-Requirements.md##).
+instructions to [setup the requirements](##02-Setup.md##).
 
 
 Setting Up a Project
