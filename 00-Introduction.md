@@ -14,7 +14,8 @@ What You'll Need
 Let's start by creating a project directory for this tutorial:
 
 ```bash
-$ mkdir ~/sauce-tutorial && cd ~/sauce-tutorial
+$ mkdir ~/sauce-tutorial
+$ cd ~/sauce-tutorial
 ```
 
 Next, download a sample project using your chosen testing
