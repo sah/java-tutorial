@@ -64,25 +64,44 @@ page and makes one assertion.
 **JUnit**
 
 ```java
-public class WebDriverTest {
+@RunWith(Parallelized.class)
+public class WebDriverParallelTest {
+
+    private String browser;
+    private String os;
+    private String version;
+
+    public WebDriverParallelTest(String os, String version, String browser) {
+        super();
+        this.os = os;
+        this.version = version;
+        this.browser = browser;
+    }
+
+    @Parameterized.Parameters
+    public static LinkedList browsersStrings() throws Exception {
+        LinkedList browsers = new LinkedList();
+        browsers.add(new String[]{Platform.XP.toString(), "25", "firefox"});
+        browsers.add(new String[]{Platform.XP.toString(), "31", "chrome"});
+        // add any additional browsers here
+        return browsers;
+    }
 
     private WebDriver driver;
 
     @Before
     public void setUp() throws Exception {
-        // Choose the browser, version, and platform to test
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        capabilities.setCapability("version", "5");
-        capabilities.setCapability("platform", Platform.XP);
-        // Create the connection to Sauce Labs to run the tests
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
+        capabilities.setCapability(CapabilityType.VERSION, version);
+        capabilities.setCapability(CapabilityType.PLATFORM, os);
         this.driver = new RemoteWebDriver(
-                new URL("http://<username>:<access_key>@ondemand.saucelabs.com:80/wd/hub"),
-                capabilities);
+                new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabilities);
     }
 
     @Test
     public void webDriver() throws Exception {
-        // Make the browser get the page and check its title
         driver.get("http://www.amazon.com/");
         assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more", driver.getTitle());
     }
@@ -91,7 +110,6 @@ public class WebDriverTest {
     public void tearDown() throws Exception {
         driver.quit();
     }
-
 }
 ```
 
@@ -136,6 +154,13 @@ public class WebDriverTest {
     }
 
 }
+```
+
+TestNG has built in support for running tests in parallel that is configured by the following line in the
+`src\test\resources\xml\testng.xml` file:
+
+```xml
+<suite name="ParallelTests" verbose="5" parallel="tests" thread-count="10">
 ```
 
 This test can connect to Sauce Labs, run tests
