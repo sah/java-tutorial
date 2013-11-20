@@ -1,11 +1,9 @@
 What You'll Need
 ----
 
-Java 6 or greater
-
-[Maven](http://maven.apache.org)
-
-JUnit or TestNG
+- Java 6 or greater
+- [Maven](http://maven.apache.org)
+- JUnit or TestNG
 
 ([Here's how you can get these set up](##02-Setup.md##).)
 
@@ -15,20 +13,11 @@ JUnit or TestNG
 
 Let's start by creating a project directory for this tutorial:
 
-<!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
-<a id="maven_mac"></a><a id="maven_linux"></a>
 ```bash
-user@host ~ $ mkdir ~/sauce-tutorial && cd ~/sauce-tutorial
+$ mkdir ~/sauce-tutorial && cd ~/sauce-tutorial
 ```
-<!-- SAUCE:END_PLATFORM -->
-<!-- SAUCE:BEGIN_PLATFORM:WIN -->
-<a id="maven_win"></a>
 
-    C:\> mkdir C:\sauce-tutorial
-    C:\> cd C:\sauce-tutorial
-<!-- SAUCE:END_PLATFORM -->
-
-Next, download and install a sample project using your chosen testing
+Next, download a sample project using your chosen testing
 framework using one of these Maven commands.
 You will be prompted to enter a group id (for example,
 `com.yourcompany`), artifact id (for example, `sauce-project`),
