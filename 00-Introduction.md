@@ -2,7 +2,9 @@ What You'll Need
 ----
 
 Java 6 or greater
+
 [Maven](http://maven.apache.org)
+
 JUnit or TestNG
 
 ([Here's how you can get these set up](##02-Setup.md##).)
@@ -33,57 +35,35 @@ You will be prompted to enter a group id (for example,
 version (defaults to `1.0.0-SNAPSHOT`), and package (default to the
 group id).
 
-<!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
 **JUnit**
 
 ```bash
-user@host ~/sauce-tutorial $ mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+$ mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 ```
 
 **TestNG**
 
 ```bash
-user@host ~/sauce-tutorial $ mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
+$ mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
 ```
-
-<!-- SAUCE:END_PLATFORM -->
-<!-- SAUCE:BEGIN_PLATFORM:WIN -->
-**JUnit**
-
-	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-junit -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
-
-**TestNG**
-
-	C:\sauce-tutorial> mvn archetype:generate -DarchetypeRepository=http://repository-saucelabs.forge.cloudbees.com/release -DarchetypeGroupId=com.saucelabs -DarchetypeArtifactId=quickstart-webdriver-testng -DarchetypeVersion=<!-- SAUCE:PROP:sauce-java-version --> -DsauceUserName=<!-- SAUCE:USERNAME --> -DsauceAccessKey=<!-- SAUCE:ACCESS_KEY -->
-
-<!-- SAUCE:END_PLATFORM -->
 
 Once the command finishes, the sample project files should have been
 created in the `~/sauce-tutorial/sauce-project`
 directory. Change to the project directory so you will be ready to run
 the tests:
 
-<!-- SAUCE:BEGIN_PLATFORM:MAC|LINUX -->
 ```bash
-user@host ~/sauce-tutorial $ cd sauce-project
+$ cd sauce-project
 ```
-<!-- SAUCE:END_PLATFORM -->
-
-<!-- SAUCE:BEGIN_PLATFORM:WIN -->
-    C:\sauce-tutorial> cd sauce-project
-<!-- SAUCE:END_PLATFORM -->
-
 
 3. Writing a test
 ---
 
-Thankfully, the sample project has done all the work of writing tests
-for you! The sample tests are in the directory
+The sample project includes some example tests in the directory
 `src/test/java/com/yourcompany/`. Lets look at the simplest test in
-`WebDriverTest.java` to see how we set up a test suite.
+`WebDriverTest.java` to see how it works.
 
-This test primarily demonstrates the setup and teardown process. The
-`setUp()` method initializes the browser testing environment by specifying the
+The `setUp()` method initializes the browser testing environment by specifying the
 browser, version, and platform to test, then creates a
 `RemoteWebDriver` to run the tests remotely. The test simply requests a
 page and makes one assertion.
