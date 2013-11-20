@@ -53,123 +53,23 @@ The sample project includes some example tests in the directory
 `src/test/java/com/yourcompany/`. Lets look at the simplest test in
 `WebDriverTest.java` to see how it works.
 
+```bash
+$ cat src/test/java/com/yourcompany/WebDriverTest.java
+```
+
 The `setUp()` method initializes the browser testing environment by specifying the
 browser, version, and platform to test, then creates a
 `RemoteWebDriver` to run the tests remotely. The test simply requests a
-page and makes one assertion.
+page and makes one assertion. 
 
-
-(These should be tabs)
-
-**JUnit**
-
-```java
-@RunWith(Parallelized.class)
-public class WebDriverParallelTest {
-
-    private String browser;
-    private String os;
-    private String version;
-
-    public WebDriverParallelTest(String os, String version, String browser) {
-        super();
-        this.os = os;
-        this.version = version;
-        this.browser = browser;
-    }
-
-    @Parameterized.Parameters
-    public static LinkedList browsersStrings() throws Exception {
-        LinkedList browsers = new LinkedList();
-        browsers.add(new String[]{Platform.XP.toString(), "25", "firefox"});
-        browsers.add(new String[]{Platform.XP.toString(), "31", "chrome"});
-        // add any additional browsers here
-        return browsers;
-    }
-
-    private WebDriver driver;
-
-    @Before
-    public void setUp() throws Exception {
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
-        capabilities.setCapability(CapabilityType.VERSION, version);
-        capabilities.setCapability(CapabilityType.PLATFORM, os);
-        this.driver = new RemoteWebDriver(
-                new URL("http://<!-- SAUCE:USERNAME -->:<!-- SAUCE:ACCESS_KEY -->@ondemand.saucelabs.com:80/wd/hub"), capabilities);
-    }
-
-    @Test
-    public void webDriver() throws Exception {
-        driver.get("http://www.amazon.com/");
-        assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more", driver.getTitle());
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
-}
-```
-
-**TestNG**
-
-```java
-public class WebDriverTest {
-
-    private WebDriver driver;
-
-    @Parameters({"username", "key", "os", "browser", "browserVersion"})
-    @BeforeMethod
-    public void setUp(@Optional("<username>") String username,
-                      @Optional("<access_key>") String key,
-                      @Optional("mac") String os,
-                      @Optional("iphone") String browser,
-                      @Optional("5.0") String browserVersion,
-                      Method method) throws Exception {
-
-        // Choose the browser, version, and platform to test
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName(browser);
-        capabilities.setCapability("version", browserVersion);
-        capabilities.setCapability("platform", Platform.valueOf(os));
-        capabilities.setCapability("name", method.getName());
-        // Create the connection to Sauce Labs to run the tests
-        this.driver = new RemoteWebDriver(
-                new URL("http://" + username + ":" + key + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabilities);
-    }
-
-    @Test
-    public void webDriver() throws Exception {
-        // Make the browser get the page and check its title
-        driver.get("http://www.amazon.com/");
-        assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more", driver.getTitle());
-    }
-
-    @AfterMethod
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
-
-}
-```
-
-TestNG has built in support for running tests in parallel that is configured by the following line in the
-`src\test\resources\xml\testng.xml` file:
-
-```xml
-<suite name="ParallelTests" verbose="5" parallel="tests" thread-count="10">
-```
-
-This test can connect to Sauce Labs, run commands
-remotely, and report the results. The `RemoteWebDriver` is a [standard
+This test connects to Sauce Labs, runs commands
+to remote-control a browser, and reports the results. It runs against several 
+browsers simultaneously, to demonstrate parallelized testing. The `RemoteWebDriver` is a [standard
 Selenium
 interface](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/remote/RemoteWebDriver.html),
 so you can do anything that you could do with a
 local Selenium test. The only code specific to Sauce Labs was the URL
-that makes the test run using a browser on Sauce Labs' servers.
+that makes the test run using a browser on Sauce Labs' servers. 
 
 
 4. Running tests
