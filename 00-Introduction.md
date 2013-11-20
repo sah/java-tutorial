@@ -163,16 +163,13 @@ TestNG has built in support for running tests in parallel that is configured by 
 <suite name="ParallelTests" verbose="5" parallel="tests" thread-count="10">
 ```
 
-This test can connect to Sauce Labs, run tests
+This test can connect to Sauce Labs, run commands
 remotely, and report the results. The `RemoteWebDriver` is a [standard
 Selenium
 interface](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/remote/RemoteWebDriver.html),
 so you can do anything that you could do with a
 local Selenium test. The only code specific to Sauce Labs was the URL
-that makes the test run using a browser on Sauce Labs' servers. The
-[Java Helper](##04-Java-Helper.md##) section of the
-tutorial also explains more Sauce-specific functionality you can use in your
-tests, but let's try running this simple test first.
+that makes the test run using a browser on Sauce Labs' servers.
 
 
 4. Running tests
