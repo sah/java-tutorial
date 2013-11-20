@@ -46,7 +46,7 @@ the tests:
 $ cd sauce-project
 ```
 
-3. Writing a test
+3. Writing tests
 ---
 
 The sample project includes some example tests in the directory
