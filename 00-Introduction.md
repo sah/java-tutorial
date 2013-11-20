@@ -157,9 +157,8 @@ Run this command from your `sauce-project` directory:
 
     mvn test
 
-This launches Maven and will download the dependencies, compiles the source code and run the tests. After a few
-moments you should see that JUnit/TestNG has started. You might not see any output instantaneously, but
-eventually you will see the following output:
+This launches Maven and will download the dependencies, compile the source code and run the tests. After a few
+moments you should see that JUnit/TestNG has started. Eventually you will see the following output:
 
 	------------------------------------------------------
 	 T E S T S
@@ -175,7 +174,3 @@ eventually you will see the following output:
 
 (The exact output will depend on the test framework you chose, but you
 should see all tests passing.)
-
-While the tests are running head to your [Sauce Labs account
-page](https://saucelabs.com/account) and you can see them running.
-You can even watch them running live if you want by clicking the test names!
