@@ -53,10 +53,6 @@ The sample project includes some example tests in the directory
 `src/test/java/com/yourcompany/`. Lets look at the simplest test in
 `WebDriverTest.java` to see how it works.
 
-```bash
-$ cat src/test/java/com/yourcompany/WebDriverTest.java
-```
-
 The `setUp()` method initializes the browser testing environment by specifying the
 browser, version, and platform to test, then creates a
 `RemoteWebDriver` to run the tests remotely. The test simply requests a
