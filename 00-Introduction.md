@@ -55,18 +55,28 @@ The sample project includes some example tests in the directory
 
 The `setUp()` method initializes the browser testing environment by specifying the
 browser, version, and platform to test, then creates a
-`RemoteWebDriver` to run the tests remotely. The test simply requests a
-page and makes one assertion. 
+`RemoteWebDriver` to run the tests remotely:
 
-This test connects to Sauce Labs, runs commands
-to remote-control a browser, and reports the results. It runs against several 
-browsers simultaneously, to demonstrate parallelized testing. The `RemoteWebDriver` is a [standard
-Selenium
+```java
+    public void setUp() throws Exception {
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
+        capabilities.setCapability(CapabilityType.VERSION, version);
+        capabilities.setCapability(CapabilityType.PLATFORM, Platform.valueOf(os));
+        this.driver = new RemoteWebDriver(
+                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+                capabilities);
+    }
+```
+
+The `RemoteWebDriver` is a [standard Selenium
 interface](http://selenium.googlecode.com/git/docs/api/java/index.html?org/openqa/selenium/remote/RemoteWebDriver.html),
 so you can do anything that you could do with a
 local Selenium test. The only code specific to Sauce Labs was the URL
 that makes the test run using a browser on Sauce Labs' servers. 
 
+Once connected to Sauce Labs, the test runs commands to remote-control a browser. This simple example test simply requests a page and makes one assertion. It runs against several browsers simultaneously, to demonstrate parallelized testing, and reports its status to Sauce Labs when complete. 
 
 4. Running tests
 ---
