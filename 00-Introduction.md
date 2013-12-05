@@ -58,14 +58,14 @@ browser, version, and platform to test, then creates a
 `RemoteWebDriver` to run the tests remotely:
 
 ```java
-    public void setUp() throws Exception {
-
+    public void setUp(...) throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
-        capabilities.setCapability(CapabilityType.VERSION, version);
-        capabilities.setCapability(CapabilityType.PLATFORM, Platform.valueOf(os));
+        capabilities.setBrowserName(browser);
+        capabilities.setCapability("version", browserVersion);
+        capabilities.setCapability("platform", os);
+        capabilities.setCapability("name", method.getName());
         this.driver = new RemoteWebDriver(
-                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+                new URL("http://" + username + ":" + key + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);
     }
 ```
